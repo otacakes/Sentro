@@ -1,0 +1,91 @@
+{
+  "name": "philippine-commuters-companion",
+  "version": "1.0.0",
+  "description": "A privacy-first, community-driven transport app for Philippine commuters with weather-adaptive UI",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "mobile:dev": "cd mobile && npm run dev",
+    "mobile:build": "cd mobile && npm run build",
+    "mobile:android": "cd mobile && npm run android",
+    "mobile:ios": "cd mobile && npm run ios"
+  },
+  "keywords": [
+    "transport",
+    "philippines",
+    "commuter",
+    "public-transport",
+    "weather-adaptive",
+    "community-driven",
+    "privacy-first",
+    "open-source"
+  ],
+  "author": "Philippine Commuter's Companion Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/philippine-commuters-companion.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/philippine-commuters-companion/issues"
+  },
+  "homepage": "https://github.com/your-username/philippine-commuters-companion#readme",
+  "dependencies": {
+    "next": "^14.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "typescript": "^5.0.0",
+    "tailwindcss": "^3.3.0",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.0",
+    "@radix-ui/react-slot": "^1.0.0",
+    "@radix-ui/react-dialog": "^1.0.0",
+    "@radix-ui/react-dropdown-menu": "^2.0.0",
+    "@radix-ui/react-toast": "^1.0.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "tailwind-merge": "^2.0.0",
+    "lucide-react": "^0.294.0",
+    "@googlemaps/js-api-loader": "^1.16.0",
+    "leaflet": "^1.9.0",
+    "react-leaflet": "^4.2.0",
+    "axios": "^1.6.0",
+    "date-fns": "^2.30.0",
+    "zustand": "^4.4.0",
+    "react-hook-form": "^7.48.0",
+    "@hookform/resolvers": "^3.3.0",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "eslint-config-next": "^14.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "prettier": "^3.0.0",
+    "prettier-plugin-tailwindcss": "^0.5.0",
+    "jest": "^29.0.0",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/jest-dom": "^6.0.0",
+    "@storybook/react": "^7.5.0",
+    "@storybook/addon-essentials": "^7.5.0",
+    "@storybook/addon-interactions": "^7.5.0",
+    "@storybook/addon-links": "^7.5.0",
+    "@storybook/blocks": "^7.5.0",
+    "@storybook/testing-library": "^0.2.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+} 
