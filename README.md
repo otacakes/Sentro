@@ -1,8 +1,18 @@
-# The Philippine Commuter's Companion
+<p align="center">
+  <img src="website/public/sentro.png" alt="Sentro Logo" width="96" />
+</p>
+
+# Sentro
 
 ## Project Overview
 
-The Philippine Commuter's Companion is an open-source, community-driven transport application designed to provide reliable, real-time public transport information for commuters in the Philippines. The project emphasizes user privacy, data transparency, and community collaboration, aiming to improve the daily commuting experience through technology and open data.
+**Sentro: Take Control of Your Daily Commute.**
+
+No more guesswork. Access live vehicle tracking, crowd levels, and instant alerts for trains, buses, and modern jeepneys. Your privacy-first, community-driven solution for smarter travel, completely open source and free to use.
+
+_Note: The Sentro web application features animated and interactive hero titles for an engaging user experience._
+
+Sentro is an open-source, community-driven transport application designed to provide reliable, real-time public transport information for commuters in the Philippines. The project emphasizes user privacy, data transparency, and community collaboration, aiming to improve the daily commuting experience through technology and open data.
 
 ## Core Philosophy
 

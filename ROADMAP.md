@@ -1,10 +1,10 @@
 # Project Roadmap
 
-This document outlines the development plan for The Philippine Commuter's Companion, from initial setup to a mature, feature-rich platform.
+This document outlines the development plan for Sentro, from initial setup to a mature, feature-rich platform.
 
 ## Project Vision
 
-The goal of this project is to create a comprehensive, privacy-focused transport application that assists commuters in the Philippines in navigating public transportation efficiently and safely.
+Sentro is dedicated to empowering commuters in the Philippines to take control of their daily journeys. The platform provides live vehicle tracking, crowd level insights, and instant alerts for trains, buses, and modern jeepneys. Sentro is a privacy-first, community-driven, open-source solution for smarter, more reliable travel.
 
 ## Development Phases
 
