@@ -2,277 +2,172 @@
   <img src="website/public/sentro.png" alt="Sentro Logo" width="96" />
 </p>
 
-# Sentro
+# Sentro 🚇
 
-## Project Overview
+A privacy-first, community-driven transport app for Philippine commuters. Built with Next.js, TypeScript, and Supabase.
 
-**Sentro: Take Control of Your Daily Commute.**
+## 🚀 Quick Deploy
 
-No more guesswork. Access live vehicle tracking, crowd levels, and instant alerts for trains, buses, and modern jeepneys. Your privacy-first, community-driven solution for smarter travel, completely open source and free to use.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/otacakes/Sentro&env=NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY,SUPABASE_SERVICE_ROLE_KEY,NEXTAUTH_SECRET,NEXTAUTH_URL&envDescription=Environment%20variables%20for%20Sentro&envLink=https://github.com/otacakes/Sentro/blob/main/DEPLOYMENT.md)
 
-_Note: The Sentro web application features animated and interactive hero titles for an engaging user experience._
+## 📋 Table of Contents
 
-Sentro is an open-source, community-driven transport application designed to provide reliable, real-time public transport information for commuters in the Philippines. The project emphasizes user privacy, data transparency, and community collaboration, aiming to improve the daily commuting experience through technology and open data.
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Deployment](#deployment)
+- [Contributing](#contributing)
+- [Security](#security)
+- [License](#license)
 
-## Core Philosophy
+## ✨ Features
 
-- **Privacy-First**: Minimal data collection and user-controlled privacy settings.
-- **Community-Driven**: Crowdsourced transport data and user reports.
-- **User-Centered Design**: Minimalistic, accessible, and responsive user interface.
-- **Open Source**: Transparent codebase and community contributions.
-- **Comprehensive Administration**: Robust admin system for content and user management.
+- 🗺️ **Interactive Transport Maps**: Real-time location tracking and route planning
+- 🔐 **Secure Authentication**: NextAuth.js with Supabase integration
+- 📱 **Responsive Design**: Optimized for mobile and desktop
+- 🌙 **Dark Mode**: Automatic theme switching based on system preferences
+- 📊 **Real-time Data**: Live transport updates and crowd reports
+- 🎯 **Community-Driven**: User-generated content and feedback
+- 🔒 **Privacy-First**: No unnecessary data collection
+- ⚡ **Performance**: Optimized for fast loading and smooth interactions
 
-## Key Features
+## 🛠️ Tech Stack
 
-### Real-Time Transport Data
+### Frontend
 
-- Community-driven vehicle location reporting
-- Crowd level indicators for trains and buses
-- Service disruption alerts with severity levels
-- Coverage for LRT-1, LRT-2, MRT-3, buses, and modern jeepneys
-- Interactive route visualization
+- **Next.js 15** - React framework with App Router
+- **TypeScript** - Type-safe development
+- **Tailwind CSS** - Utility-first styling
+- **Radix UI** - Accessible component primitives
+- **Zustand** - State management
+- **React Hook Form** - Form handling
 
-### Route Mapping and Planning
+### Backend
 
-- Multi-modal journey planning (walking, trains, buses)
-- Offline maps using OpenStreetMap and Leaflet
-- Real-time location tracking and updates
+- **Next.js API Routes** - Serverless functions
+- **Supabase** - Database and authentication
+- **NextAuth.js** - Authentication framework
 
-### News and Alerts
+### Infrastructure
 
-- Real-time news feed with categorized updates
-- Service alerts with severity levels
-- Fare change notifications and government program updates
-- Official announcements and tabbed news interface
+- **Vercel** - Deployment and hosting
+- **GitHub Actions** - CI/CD pipeline
+- **Jest** - Testing framework
 
-### User Management and Authentication
-
-- Supabase-powered authentication with NextAuth integration
-- User profiles with customizable preferences
-- Favorite locations and search history management
-- Role-based access control (user, admin, super_admin)
-- Sign-in required for full app functionality
-
-### Administration and Analytics
-
-- Comprehensive admin dashboard with real-time statistics
-- User and admin management with analytics
-- Content management for news and alerts
-- Protected admin routes with authentication guards
-
-### Location Services
-
-- Favorite locations with category management
-- Search history with frequency tracking
-- Location-based services with GPS integration
-- Offline location storage and privacy controls
-
-### Data Analytics
-
-- Interactive charts and data tables
-- Sorting, filtering, and pagination
-- Real-time statistics and export capabilities
-
-### User Interface and Accessibility
-
-- Shadcn UI components with Radix UI primitives
-- Responsive design for all device sizes
-- Accessibility features (high contrast, large text, screen reader support)
-- Dark and light mode support
-
-## Technology Stack
-
-### Web Application
-
-- **Framework**: Next.js 15 with TypeScript
-- **UI Library**: Shadcn UI and Radix UI
-- **Styling**: Tailwind CSS
-- **State Management**: Zustand and React Context
-- **Maps**: Leaflet and OpenStreetMap
-- **Forms**: React Hook Form and Zod validation
-- **Charts**: Recharts
-- **Tables**: TanStack Table
-- **Authentication**: NextAuth.js and Supabase Auth
-- **Database**: Supabase PostgreSQL
-- **Real-time**: Supabase real-time subscriptions
-
-### Development Tools
-
-- **Testing**: Jest and React Testing Library
-- **Storybook**: Component documentation
-- **Linting**: ESLint and Prettier
-- **Type Checking**: TypeScript strict mode
-- **API**: RESTful API with Next.js API routes
-- **Build Tools**: Next.js 15 with App Router
-
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js 18 or higher
-- npm 9 or higher
-- Git
-- Supabase account (for authentication and database)
+- Node.js 18+
+- npm 9+
+- Supabase account
+- Google Maps API key (optional)
+- OpenWeather API key (optional)
 
-### Installation
+### Local Development
 
-1. Clone the repository:
+1. **Clone the repository**
+
    ```bash
-   git clone https://github.com/your-username/philippine-commuters-companion.git
-   cd philippine-commuters-companion
+   git clone https://github.com/otacakes/Sentro.git
+   cd Sentro
    ```
-2. Install dependencies:
+
+2. **Install dependencies**
+
    ```bash
-   cd website
    npm install
    ```
-3. Set up environment variables:
+
+3. **Set up environment variables**
+
    ```bash
-   cp .env.example .env.local
+   cp website/vercel.env.example website/.env.local
+   # Edit .env.local with your API keys
    ```
-   Edit `.env.local` with your API keys.
-4. Set up the database:
-   - Run the Supabase setup scripts provided in `supabase-setup.sql` and `supabase-admin-setup.sql` using the Supabase SQL editor.
-5. Start the development server:
+
+4. **Start development server**
+
    ```bash
    npm run dev
    ```
-6. Open your browser and navigate to [http://localhost:3000](http://localhost:3000)
 
-### Available Scripts
+5. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
-- `npm run type-check` - Run TypeScript checks
-- `npm run test` - Run tests
-- `npm run test:watch` - Run tests in watch mode
-- `npm run storybook` - Start Storybook
-- `npm run build-storybook` - Build Storybook
-- `npm run db:setup` - Set up database tables
-- `npm run db:seed` - Seed with sample data
+## 🚀 Deployment
 
-## Platform Support
+### Vercel (Recommended)
 
-### Phase 1: Web Application
+1. **One-Click Deploy**
 
-- Responsive desktop website
-- Progressive Web App (PWA) features
-- Offline functionality
-- Admin dashboard
-- User authentication
+   - Click the "Deploy with Vercel" button above
+   - Connect your GitHub repository
+   - Add environment variables
+   - Deploy!
 
-### Phase 2: Android APK
+2. **Manual Deployment**
+   - See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed instructions
+   - Configure Supabase settings
+   - Set up environment variables
+   - Deploy to Vercel
 
-- Direct APK distribution via GitHub Releases
-- Built-in update checker
+### Environment Variables
 
-### Phase 3: App Store Launch
+Required environment variables for deployment:
 
-- Google Play Store
-- Apple App Store
+```env
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
 
-## Design System
+# NextAuth
+NEXTAUTH_SECRET=your_nextauth_secret
+NEXTAUTH_URL=https://your-domain.vercel.app
 
-### UI Components
+# Optional
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_google_maps_key
+NEXT_PUBLIC_OPENWEATHER_API_KEY=your_openweather_key
+```
 
-- Timeline View (desktop)
-- Gesture-driven interface (mobile)
-- Transport Cards
-- Route Polyline
-- Admin Dashboard
-- News Feed
+## 🤝 Contributing
 
-## Authentication and Administration
-
-### User Features
-
-- Sign up/sign in with email and password
-- Profile management
-- Favorite locations
-- Search history
-- Offline mode
-
-### Admin Features
-
-- Admin dashboard with real-time statistics
-- User management and analytics
-- Content management for news and alerts
-- System monitoring
-- Role-based permissions
-
-### Security Features
-
-- JWT-based authentication
-- Protected routes
-- Role-based access control
-- Input validation
-- CSRF protection and security headers
-
-## Data Management
-
-### User Data
-
-- Favorite locations
-- Search history
-- User preferences
-- Privacy settings
-
-### Transport Data
-
-- Station information
-- Line data
-- Real-time updates
-- Service alerts
-
-### Analytics Data
-
-- User engagement metrics
-- Transport usage statistics
-- System performance monitoring
-- Error tracking
-
-## Contributing
-
-Contributions from the community are welcome. Please follow the guidelines below:
-
-### How to Contribute
-
-1. Report bugs by creating an issue with detailed descriptions.
-2. Suggest new features or improvements.
-3. Submit pull requests for code contributions.
-4. Improve documentation and add examples.
-5. Assist with testing and reporting issues.
-6. Contribute to UI/UX improvements.
-7. Help improve the admin dashboard.
-8. Contribute transport data and updates.
+We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md) for details.
 
 ### Development Workflow
 
-1. Fork the repository.
-2. Create a feature branch: `git checkout -b feature/your-feature`.
-3. Make your changes and add tests.
-4. Commit your changes: `git commit -m 'feat: add your feature'`.
-5. Push to the branch: `git push origin feature/your-feature`.
-6. Open a Pull Request.
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run tests: `npm run test`
+5. Submit a pull request
 
-### Code Standards
+## 🔒 Security
 
-- Use TypeScript strict mode and proper types.
-- Follow functional component patterns in React.
-- Use Tailwind CSS for styling.
-- Aim for high test coverage.
-- Optimize for performance and accessibility.
+We take security seriously. Please see our [Security Policy](./SECURITY.md) for details.
 
-## License
+- **Vulnerability Reports**: security@sentro.app
+- **Security Features**: HTTPS, CSP, secure headers
+- **Privacy**: GDPR compliant, minimal data collection
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+## 📄 License
 
-## Acknowledgments
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
 
-- Supabase for authentication and database services
-- Shadcn UI for the component library
-- OpenStreetMap for map data
-- The Philippine transport community for feedback and support
-- All contributors who help improve this project
+## 🙏 Acknowledgments
+
+- Philippine commuter community
+- Open source contributors
+- Transport data providers
+- Next.js and Vercel teams
+
+## 📞 Support
+
+- **Documentation**: [DEPLOYMENT.md](./DEPLOYMENT.md)
+- **Issues**: [GitHub Issues](https://github.com/otacakes/Sentro/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/otacakes/Sentro/discussions)
+
+---
+
+**Made with ❤️ for Philippine commuters**

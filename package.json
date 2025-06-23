@@ -1,5 +1,5 @@
 {
-  "name": "philippine-commuters-companion",
+  "name": "sentro",
   "version": "1.0.0",
   "description": "A privacy-first, community-driven transport app for Philippine commuters",
   "private": true,
@@ -12,7 +12,9 @@
     "start": "npm run start --workspace=website",
     "lint": "npm run lint --workspace=website",
     "test": "npm run test --workspace=website",
-    "storybook": "npm run storybook --workspace=website"
+    "type-check": "npm run type-check --workspace=website",
+    "storybook": "npm run storybook --workspace=website",
+    "vercel-build": "npm run build --workspace=website"
   },
   "keywords": [
     "transport",
@@ -26,16 +28,16 @@
     "react",
     "typescript"
   ],
-  "author": "Philippine Commuter's Companion Team",
+  "author": "Sentro Team",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/philippine-commuters-companion.git"
+    "url": "https://github.com/otacakes/Sentro.git"
   },
   "bugs": {
-    "url": "https://github.com/your-username/philippine-commuters-companion/issues"
+    "url": "https://github.com/otacakes/Sentro/issues"
   },
-  "homepage": "https://github.com/your-username/philippine-commuters-companion#readme",
+  "homepage": "https://github.com/otacakes/Sentro#readme",
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=9.0.0"
