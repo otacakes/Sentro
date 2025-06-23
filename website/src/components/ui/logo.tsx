@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Compass } from 'lucide-react'
+import Image from 'next/image'
 import { cn } from '@/lib/utils'
 
 interface LogoProps {
@@ -8,11 +8,30 @@ interface LogoProps {
 
 export function Logo({ className }: LogoProps) {
   return (
-    <Link href="/" className={cn("flex items-center gap-2", className)}>
-      <div className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center">
-        <Compass className="w-5 h-5" />
+    <Link
+      href="/"
+      className={cn(
+        "flex items-center gap-3 group transition-all duration-200",
+        className
+      )}
+      aria-label="Sentro Home"
+    >
+      <div
+        className="w-10 h-10 rounded-full bg-background flex items-center justify-center overflow-hidden shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all border border-border dark:bg-neutral-900"
+        style={{ minWidth: 40, minHeight: 40 }}
+      >
+        <Image
+          src="/sentro.png"
+          alt="Sentro Logo"
+          width={40}
+          height={40}
+          priority
+          className="object-contain"
+        />
       </div>
-      <span className="font-bold text-lg tracking-tight text-primary">Commuter's Companion</span>
+      <span className="font-bold text-xl tracking-tight text-primary dark:text-white select-none">
+        Sentro
+      </span>
     </Link>
   )
 } 

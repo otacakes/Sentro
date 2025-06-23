@@ -26,7 +26,7 @@ const navLinks = [
   { href: "/app?view=timeline", label: "Timeline" },
   { href: "/app?view=map", label: "Map" },
   { href: "/app?view=news", label: "News & Alerts" },
-  { href: "https://github.com/your-username/philippine-commuters-companion", label: "Contribute", external: true },
+  { href: "https://github.com/your-username/sentro", label: "Contribute", external: true },
 ]
 
 function MainNav() {
@@ -52,7 +52,7 @@ function MainNav() {
               News & Alerts
             </button>
           </Link>
-          <a href="https://github.com/your-username/philippine-commuters-companion" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent h-10 px-4 py-2 hover:text-accent-foreground transition-colors">
+          <a href="https://github.com/your-username/sentro" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent h-10 px-4 py-2 hover:text-accent-foreground transition-colors">
             Contribute
           </a>
         </div>
@@ -126,7 +126,7 @@ function Footer() {
           <span className="ml-0 md:ml-2">Sign in for full experience</span>
         </div>
         <div className="flex items-center gap-4 text-sm text-muted-foreground">
-          <a href="https://github.com/your-username/philippine-commuters-companion" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-foreground"><Github className="w-4 h-4" /> GitHub</a>
+          <a href="https://github.com/your-username/sentro" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-foreground"><Github className="w-4 h-4" /> GitHub</a>
           <Link href="/about" className="hover:text-foreground">About</Link>
           <Link href="/privacy" className="hover:text-foreground">Privacy</Link>
         </div>
@@ -176,10 +176,10 @@ export default function HomePage() {
         <section className="relative min-h-screen flex flex-col justify-center items-center text-center gap-12 md:gap-16 py-24 md:py-32 pb-32">
           <div className="container mx-auto px-4 max-w-4xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6 text-primary">
-              The Philippine Commuter's Companion
+              Sentro: Take Control of Your Daily Commute.
             </h1>
             <p className="text-muted-foreground text-lg mb-8">
-              A privacy-first, community-driven transport app. Real-time routes, crowd levels, news, and modern UI.
+              No more guesswork. Access live vehicle tracking, crowd levels, and instant alerts for trains, buses, and modern jeepneys. Your privacy-first, community-driven solution for smarter travel, completely <span className="font-bold text-foreground">open source and free to use</span>.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Button size="lg" asChild>

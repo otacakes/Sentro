@@ -15,8 +15,8 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Philippine Commuter's Companion",
-  description: 'Your smart companion for navigating Philippine public transportation',
+  title: "Sentro",
+  description: 'Sentro: Take Control of Your Daily Commute. Live vehicle tracking, crowd levels, and instant alerts for trains, buses, and modern jeepneys. Privacy-first, community-driven, open source.'
 }
 
 export default function RootLayout({
@@ -26,6 +26,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" href="/favicon.png" type="image/png" />
+      </head>
       <body className={`${inter.className} antialiased`}>
         <ThemeProvider
           attribute="class"
