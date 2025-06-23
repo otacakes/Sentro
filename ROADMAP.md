@@ -1,367 +1,233 @@
 # Project Roadmap
 
-This roadmap outlines the development plan for The Philippine Commuter's Companion, organized by phases and milestones.
-
-## 🎯 Vision Statement
-
-To create the most reliable, privacy-first, and community-driven transport application for Filipino commuters, making daily commuting more efficient, informed, and enjoyable.
-
-## 📅 Development Phases
-
-### Phase 1: MVP Foundation (Weeks 1-4) 🚀
-
-**Goal**: Establish the core application structure and basic functionality
-
-#### Week 1: Project Setup
-- [x] **Repository Setup**
-  - [x] Initialize GitHub repository
-  - [x] Set up project structure
-  - [x] Configure development tools (ESLint, Prettier, TypeScript)
-  - [x] Create comprehensive documentation
-
-- [ ] **Core Infrastructure**
-  - [ ] Set up Next.js 14 with App Router
-  - [ ] Configure Tailwind CSS with weather-adaptive themes
-  - [ ] Implement basic component library
-  - [ ] Set up testing framework (Jest + React Testing Library)
-
-#### Week 2: Weather-Adaptive UI System
-- [ ] **Weather Integration**
-  - [ ] Integrate OpenWeatherMap API
-  - [ ] Implement weather detection logic
-  - [ ] Create weather-adaptive color schemes
-  - [ ] Build theme switching components
-
-- [ ] **Design System**
-  - [ ] Create Shadcn UI components
-  - [ ] Implement weather-specific styling
-  - [ ] Build responsive layout components
-  - [ ] Add accessibility features
-
-#### Week 3: Basic Map Integration
-- [ ] **Google Maps Integration**
-  - [ ] Set up Google Maps API
-  - [ ] Implement basic map component
-  - [ ] Add location detection
-  - [ ] Create map controls
-
-- [ ] **Offline Map Support**
-  - [ ] Integrate Leaflet for offline maps
-  - [ ] Implement map tile caching
-  - [ ] Add offline detection
-  - [ ] Create fallback mechanisms
-
-#### Week 4: Manual Route Data
-- [ ] **Static Route Data**
-  - [ ] Create data structure for transport routes
-  - [ ] Add 2-3 Metro Manila routes (LRT-1, MRT-3)
-  - [ ] Implement basic route display
-  - [ ] Add route information cards
-
-- [ ] **MVP Features**
-  - [ ] Basic route planning interface
-  - [ ] Simple journey visualization
-  - [ ] Route information display
-  - [ ] Basic search functionality
-
-### Phase 2: Community Features (Weeks 5-8) 👥
-
-**Goal**: Implement community-driven features and data collection
-
-#### Week 5: User Reporting System
-- [ ] **Anonymous Reporting**
-  - [ ] Create reporting interface
-  - [ ] Implement anonymous data submission
-  - [ ] Add crowd level reporting
-  - [ ] Create service disruption alerts
-
-- [ ] **Data Validation**
-  - [ ] Implement basic data validation
-  - [ ] Add spam prevention
-  - [ ] Create data quality checks
-  - [ ] Build moderation tools
-
-#### Week 6: Real-Time Data Display
-- [ ] **Live Data Integration**
-  - [ ] Connect community reports to map
-  - [ ] Implement real-time updates
-  - [ ] Add data visualization
-  - [ ] Create status indicators
-
-- [ ] **Crowd Level System**
-  - [ ] Design crowd level indicators
-  - [ ] Implement color-coded system
-  - [ ] Add historical data tracking
-  - [ ] Create trend analysis
-
-#### Week 7: News and Alerts
-- [ ] **News Feed Integration**
-  - [ ] Set up RSS feed parsing
-  - [ ] Integrate DOTr announcements
-  - [ ] Add fare change notifications
-  - [ ] Implement alert system
-
-- [ ] **Content Management**
-  - [ ] Create content filtering
-  - [ ] Add category system
-  - [ ] Implement search functionality
-  - [ ] Build notification preferences
-
-#### Week 8: Enhanced Route Planning
-- [ ] **Multi-Modal Planning**
-  - [ ] Implement walking directions
-  - [ ] Add transfer calculations
-  - [ ] Create journey optimization
-  - [ ] Build alternative routes
-
-- [ ] **Advanced Features**
-  - [ ] Add fare calculation
-  - [ ] Implement journey time estimates
-  - [ ] Create accessibility options
-  - [ ] Add language preferences
-
-### Phase 3: Mobile Application (Weeks 9-12) 📱
-
-**Goal**: Develop and launch the mobile application
-
-#### Week 9: React Native Setup
-- [ ] **Mobile Infrastructure**
-  - [ ] Set up React Native project
-  - [ ] Configure development environment
-  - [ ] Implement navigation system
-  - [ ] Create mobile-specific components
-
-- [ ] **Core Mobile Features**
-  - [ ] Port weather-adaptive UI
-  - [ ] Implement map integration
-  - [ ] Add offline functionality
-  - [ ] Create mobile-optimized interface
-
-#### Week 10: Mobile-Specific Features
-- [ ] **Thumb-First Design**
-  - [ ] Implement gesture navigation
-  - [ ] Create bottom sheet components
-  - [ ] Add haptic feedback
-  - [ ] Optimize for one-handed use
-
-- [ ] **Mobile Enhancements**
-  - [ ] Add push notifications
-  - [ ] Implement background location
-  - [ ] Create widget support
-  - [ ] Add voice navigation
-
-#### Week 11: APK Distribution System
-- [ ] **Build System**
-  - [ ] Set up automated builds
-  - [ ] Configure GitHub Actions
-  - [ ] Implement version management
-  - [ ] Create release automation
-
-- [ ] **Distribution Platform**
-  - [ ] Set up GitHub Releases
-  - [ ] Create download page
-  - [ ] Implement update checker
-  - [ ] Add installation instructions
-
-#### Week 12: Mobile Launch
-- [ ] **Testing and Polish**
-  - [ ] Comprehensive mobile testing
-  - [ ] Performance optimization
-  - [ ] Bug fixes and refinements
-  - [ ] User experience improvements
-
-- [ ] **Launch Preparation**
-  - [ ] Create launch materials
-  - [ ] Prepare community announcement
-  - [ ] Set up feedback channels
-  - [ ] Plan marketing strategy
-
-### Phase 4: Advanced Features (Weeks 13-16) 🚀
-
-**Goal**: Implement advanced features and optimizations
-
-#### Week 13: GTFS Integration
-- [ ] **Data Standardization**
-  - [ ] Research GTFS implementation
-  - [ ] Create data conversion tools
-  - [ ] Implement GTFS parsing
-  - [ ] Build data validation
-
-- [ ] **Enhanced Routing**
-  - [ ] Implement GTFS-based routing
-  - [ ] Add schedule integration
-  - [ ] Create real-time updates
-  - [ ] Build predictive analytics
-
-#### Week 14: Machine Learning Features
-- [ ] **Route Optimization**
-  - [ ] Implement ML-based routing
-  - [ ] Add traffic prediction
-  - [ ] Create personalized recommendations
-  - [ ] Build learning algorithms
-
-- [ ] **Smart Features**
-  - [ ] Add voice commands
-  - [ ] Implement predictive text
-  - [ ] Create smart notifications
-  - [ ] Build adaptive interfaces
-
-#### Week 15: Accessibility and Localization
-- [ ] **Accessibility Improvements**
-  - [ ] Implement screen reader support
-  - [ ] Add keyboard navigation
-  - [ ] Create high contrast modes
-  - [ ] Build voice navigation
-
-- [ ] **Localization**
-  - [ ] Add Filipino language support
-  - [ ] Implement regional dialects
-  - [ ] Create cultural adaptations
-  - [ ] Build translation system
-
-#### Week 16: Performance and Scale
-- [ ] **Performance Optimization**
-  - [ ] Implement code splitting
-  - [ ] Add service worker caching
-  - [ ] Optimize bundle size
-  - [ ] Create performance monitoring
-
-- [ ] **Scalability**
-  - [ ] Implement CDN integration
-  - [ ] Add database optimization
-  - [ ] Create load balancing
-  - [ ] Build monitoring systems
-
-### Phase 5: App Store Launch (Weeks 17-20) 🏪
-
-**Goal**: Prepare for official app store launches
-
-#### Week 17: App Store Preparation
-- [ ] **Google Play Store**
-  - [ ] Create developer account
-  - [ ] Prepare store listing
-  - [ ] Create app screenshots
-  - [ ] Write app descriptions
-
-- [ ] **Apple App Store**
-  - [ ] Set up Apple Developer account
-  - [ ] Prepare iOS build
-  - [ ] Create App Store assets
-  - [ ] Submit for review
-
-#### Week 18: Marketing and Community
-- [ ] **Marketing Materials**
-  - [ ] Create promotional videos
-  - [ ] Design marketing assets
-  - [ ] Write press releases
-  - [ ] Plan launch events
-
-- [ ] **Community Building**
-  - [ ] Expand contributor base
-  - [ ] Create ambassador program
-  - [ ] Build partnerships
-  - [ ] Organize meetups
-
-#### Week 19: Launch and Monitoring
-- [ ] **Launch Execution**
-  - [ ] Coordinate app store launches
-  - [ ] Monitor app performance
-  - [ ] Handle user feedback
-  - [ ] Address launch issues
-
-- [ ] **Post-Launch**
-  - [ ] Analyze user metrics
-  - [ ] Gather user feedback
-  - [ ] Plan future updates
-  - [ ] Scale infrastructure
-
-#### Week 20: Future Planning
-- [ ] **Long-term Vision**
-  - [ ] Plan next development cycle
-  - [ ] Research new features
-  - [ ] Explore partnerships
-  - [ ] Plan sustainability model
-
-## 🎯 Success Metrics
-
-### Phase 1 Success Criteria
-- [ ] Weather-adaptive UI working correctly
-- [ ] Basic map integration functional
-- [ ] 2-3 routes displaying properly
-- [ ] Responsive design working on all devices
-
-### Phase 2 Success Criteria
-- [ ] Community reporting system active
-- [ ] Real-time data displaying on map
-- [ ] News feed integrated and functional
-- [ ] Multi-modal route planning working
-
-### Phase 3 Success Criteria
-- [ ] Mobile app functional and stable
-- [ ] APK distribution system working
-- [ ] 100+ active mobile users
-- [ ] Positive user feedback
-
-### Phase 4 Success Criteria
-- [ ] GTFS integration complete
-- [ ] ML features implemented
-- [ ] Accessibility standards met
-- [ ] Performance benchmarks achieved
-
-### Phase 5 Success Criteria
-- [ ] Successfully launched on app stores
-- [ ] 1,000+ active users
-- [ ] 4+ star app store ratings
-- [ ] Sustainable community growth
-
-## 🔄 Continuous Development
-
-After the initial 20-week development cycle, the project will continue with:
-
-### Ongoing Maintenance
-- Regular security updates
-- Bug fixes and improvements
-- Performance optimizations
-- User feedback integration
-
-### Feature Development
-- New transport modes
-- Enhanced routing algorithms
-- Additional cities and regions
-- Advanced analytics
-
-### Community Growth
-- Contributor onboarding
-- Documentation updates
-- Community events
-- Partnership development
-
-## 📊 Resource Requirements
-
-### Development Team
-- **Lead Developer**: Full-time (20 weeks)
-- **UI/UX Designer**: Part-time (10 weeks)
-- **Mobile Developer**: Full-time (8 weeks)
-- **Community Manager**: Part-time (ongoing)
-
-### Infrastructure Costs
-- **Hosting**: Vercel (Free tier initially)
-- **Maps API**: Google Maps (Free tier)
-- **Weather API**: OpenWeatherMap (Free tier)
-- **Domain**: ~$10/year
-- **App Store Fees**: $25 (Google Play) + $99 (Apple)
-
-### Total Estimated Cost: ~$134 for first year
-
-## 🚀 Getting Started
-
-To contribute to this roadmap:
-
-1. **Review the current phase** and identify areas where you can help
-2. **Join the community** through GitHub Discussions
-3. **Pick up a task** from the current milestone
-4. **Submit your contribution** following the contributing guidelines
+This document outlines the development plan for The Philippine Commuter's Companion, from initial setup to a mature, feature-rich platform.
+
+## Project Vision
+
+The goal of this project is to create a comprehensive, privacy-focused transport application that assists commuters in the Philippines in navigating public transportation efficiently and safely.
+
+## Development Phases
+
+### Phase 1: Foundation and Minimum Viable Product (Current Focus)
+
+**Objective:** Launch a robust web application that establishes the core user experience and essential administrative features.
+
+| Category             | Task                                                                               | Status      |
+| :------------------- | :--------------------------------------------------------------------------------- | :---------- |
+| Technical Foundation | Set up Next.js 15 monorepo with TypeScript and Tailwind CSS.                       | Complete    |
+|                      | Integrate Supabase for database and authentication.                                | Complete    |
+|                      | Implement NextAuth.js for session management.                                      | Complete    |
+|                      | Integrate Leaflet with OpenStreetMap for the core map view.                        | Complete    |
+|                      | Establish CI/CD pipeline with GitHub Actions for linting and testing.              | In Progress |
+| User Authentication  | Implement user sign-up, sign-in, and sign-out flows.                               | Complete    |
+|                      | Implement password reset functionality.                                            | In Progress |
+|                      | Set up basic user profile management (view/edit).                                  | In Progress |
+| Core User Feature    | Develop the basic multi-modal route planning algorithm (v1).                       | In Progress |
+|                      | Implement interactive route visualization (drawing polylines on the map).          | In Progress |
+|                      | Build the "Favorite Locations" feature (CRUD operations).                          | Planned     |
+|                      | Implement basic search history tracking.                                           | Planned     |
+| Admin System         | Build the secure admin dashboard layout.                                           | In Progress |
+|                      | Implement user management table with view and search capabilities.                 | Planned     |
+|                      | Develop the content management system for creating and publishing news and alerts. | Planned     |
+|                      | Display basic system statistics (total users, total alerts).                       | Planned     |
 
 ---
 
-*This roadmap is a living document and will be updated based on community feedback and changing requirements.* 🚇🇵🇭 
+### Phase 2: Community and Real-Time Features
+
+**Objective:** Enhance the platform with live, community-driven data and improve the mobile web experience, transforming it into a dynamic, real-time tool.
+
+| Category             | Task                                                                              | Status  |
+| :------------------- | :-------------------------------------------------------------------------------- | :------ |
+| Technical Foundation | Implement Supabase real-time subscriptions for live data feeds.                   | Planned |
+|                      | Develop offline caching strategy for PWA (maps, user data, recent alerts).        | Planned |
+|                      | Integrate real-time weather API to display current conditions.                    | Planned |
+| Community Features   | Implement the front-end for community reporting (crowd levels, delays).           | Planned |
+|                      | Create the backend logic to receive and process user reports.                     | Planned |
+|                      | Display crowdsourced data visually on the map and route details.                  | Planned |
+| User Features        | Implement user settings for notifications and privacy.                            | Planned |
+|                      | Add push notifications for severe service alerts (using Supabase Edge Functions). | Planned |
+|                      | Refine the UI/UX for mobile browsers.                                             | Planned |
+| Admin System         | Build moderation tools for community-submitted reports.                           | Planned |
+|                      | Add advanced analytics to the dashboard (e.g., interactive charts with Recharts). | Planned |
+|                      | Implement role management for assigning admin and super_admin roles.              | Planned |
+
+---
+
+### Phase 3: Mobile Application and Expansion
+
+**Objective:** Expand the platform by launching a native mobile application and introducing advanced features and localization.
+
+| Category             | Task                                                                                       | Status  |
+| :------------------- | :----------------------------------------------------------------------------------------- | :------ |
+| Technical Foundation | Decide on mobile framework (React Native or Flutter).                                      | Planned |
+|                      | Set up mobile application project, sharing services/logic with the web app where possible. | Planned |
+|                      | Plan API strategy to serve both web and mobile clients efficiently.                        | Planned |
+| Mobile App (MVP)     | Implement user authentication flow, reusing Supabase backend.                              | Planned |
+|                      | Re-create the core route planning and map visualization experience.                        | Planned |
+|                      | Implement native push notifications.                                                       | Planned |
+|                      | Distribute initial versions via direct APK download on GitHub Releases.                    | Planned |
+| Feature Expansion    | Implement multi-language support (Tagalog, Cebuano).                                       | Planned |
+|                      | Develop advanced search filters (e.g., filter by transport type, time).                    | Planned |
+|                      | Add accessibility features (WCAG 2.1 compliance).                                          | Planned |
+| Admin System         | Add analytics specific to mobile app usage.                                                | Planned |
+|                      | Create tools for sending targeted push notifications from the admin dashboard.             | Planned |
+
+---
+
+### Phase 4: Maturity and Intelligent Features
+
+**Objective:** Evolve the application into an intelligent travel companion using data science, while preparing for official app store launches.
+
+| Category                   | Task                                                                             | Status  |
+| :------------------------- | :------------------------------------------------------------------------------- | :------ |
+| Technical Foundation       | Refactor codebase and optimize database queries for scale.                       | Planned |
+|                            | Conduct security audits and performance analysis.                                | Planned |
+| Intelligent Features       | Research and develop machine learning models for predictive travel times.        | Planned |
+|                            | Develop algorithms for suggesting optimal travel times based on historical data. | Planned |
+|                            | Implement smart alerts based on user preferences and travel patterns.            | Planned |
+| Community and Gamification | Introduce user profiles with contribution scores and badges.                     | Planned |
+|                            | Create leaderboards for top data contributors.                                   | Planned |
+| Deployment                 | Prepare for Google Play Store and Apple App Store submission.                    | Planned |
+
+## Success Metrics
+
+### User Engagement
+
+- Daily active users
+- Session duration
+- Feature adoption rate
+- Retention rate
+
+### Technical Performance
+
+- Load time
+- Uptime
+- Error rate
+- Mobile performance (Lighthouse score)
+
+### Community Impact
+
+- Number of user reports
+- Community contributions
+- Local partnerships
+- Media coverage
+
+## Technical Requirements
+
+### Performance Targets
+
+- First Contentful Paint: < 1.5s
+- Largest Contentful Paint: < 2.5s
+- Cumulative Layout Shift: < 0.1
+- First Input Delay: < 100ms
+
+### Accessibility Standards
+
+- WCAG 2.1 AA compliance
+- Screen reader compatibility
+- Keyboard navigation support
+- Minimum color contrast ratio of 4.5:1
+
+### Security Requirements
+
+- End-to-end data encryption
+- Multi-factor authentication (planned)
+- GDPR compliance
+- Regular security assessments
+
+## Monitoring and Analytics
+
+### Key Performance Indicators
+
+- User acquisition
+- Feature usage rates
+- User retention
+- Performance metrics
+- Error tracking
+
+### Tools and Services
+
+- Google Analytics, Vercel Analytics
+- Sentry, LogRocket
+- Lighthouse, WebPageTest
+- Pingdom, UptimeRobot
+
+## Community Involvement
+
+### Open Source Contributions
+
+- Peer code review process
+- Community documentation
+- Beta testing program
+- User feedback system
+
+### Partnerships
+
+- Collaboration with transport agencies
+- Research partnerships with universities
+- API integrations with technology companies
+- Engagement with community organizations
+
+## Growth Strategy
+
+### User Acquisition
+
+- Social media outreach
+- Partnerships with transport agencies
+- Search engine optimization
+- User referral program
+
+### Revenue Model
+
+- Freemium model for basic and premium features
+- Enterprise solutions for business clients
+- Revenue sharing through partnerships
+
+## Success Criteria
+
+### Phase 1
+
+- Project foundation complete
+- Basic user interface operational
+- Authentication system functional
+- Admin dashboard operational
+- Route planning functional
+- MVP launch
+
+### Phase 2
+
+- Real-time features operational
+- Community reporting functional
+- Mobile web experience optimized
+- Push notifications implemented
+- Advanced admin features complete
+
+### Phase 3
+
+- Mobile application launched
+- Multi-language support implemented
+- Accessibility compliance achieved
+- Expanded user base
+- High community engagement
+
+### Phase 4
+
+- Intelligent features implemented
+- App store deployment completed
+- Gamification system active
+- Platform stability and maturity
+- Revenue streams established
+
+## Contact and Support
+
+For questions, support, or to contribute, please use the following channels:
+
+- GitHub Issues: Report bugs and request features
+- GitHub Discussions: Community discussions
+- Documentation: Project documentation
+- Contributing: See CONTRIBUTING.md
+
+---
+
+This roadmap is a living document and will be updated as the project evolves.

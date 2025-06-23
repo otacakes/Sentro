@@ -1,291 +1,268 @@
-# 🚇 The Philippine Commuter's Companion
+# The Philippine Commuter's Companion
 
-*A privacy-first, community-driven transport app for Philippine commuters with weather-adaptive UI*
+## Project Overview
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
+The Philippine Commuter's Companion is an open-source, community-driven transport application designed to provide reliable, real-time public transport information for commuters in the Philippines. The project emphasizes user privacy, data transparency, and community collaboration, aiming to improve the daily commuting experience through technology and open data.
 
-## 🌟 Project Overview
+## Core Philosophy
 
-The Philippine Commuter's Companion is an open-source, privacy-first transport application designed specifically for Filipino commuters. Our mission is to provide reliable, real-time public transport information while maintaining user privacy and fostering community collaboration.
+- **Privacy-First**: Minimal data collection and user-controlled privacy settings.
+- **Community-Driven**: Crowdsourced transport data and user reports.
+- **User-Centered Design**: Minimalistic, accessible, and responsive user interface.
+- **Open Source**: Transparent codebase and community contributions.
+- **Comprehensive Administration**: Robust admin system for content and user management.
 
-### 🎯 Core Philosophy
+## Key Features
 
-- **Privacy-First**: No sign-in required, all data stored locally
-- **Community-Driven**: Crowdsourced transport data and reports
-- **Calm Commuting**: Minimalistic, serene UI that adapts to weather
-- **Zero-Cost**: Completely free to use with no subscriptions
-- **Open Source**: Transparent, community-contributed codebase
+### Real-Time Transport Data
 
-## ✨ Key Features
-
-### 🚌 Real-Time Transport Data
 - Community-driven vehicle location reporting
 - Crowd level indicators for trains and buses
-- Service disruption alerts
-- Coverage: LRT-1, LRT-2, MRT-3, buses, modern jeepneys
+- Service disruption alerts with severity levels
+- Coverage for LRT-1, LRT-2, MRT-3, buses, and modern jeepneys
+- Interactive route visualization
 
-### 🗺️ GPS-like Route Mapping
-- Multi-modal journey planning (walking + trains + buses)
-- Interactive route visualization with polylines
-- Google Maps integration for online view
-- **Offline maps** using OpenStreetMap (OSM)
+### Route Mapping and Planning
 
-### 🌤️ Dynamic Weather-Adaptive UI
-- **"Malamig na Umaga"** - Cool, calm palette for cloudy weather
-- **"Ambon"** - Soothing blue tones for rainy conditions  
-- **"Araw ng Tanghali"** - Bright, warm palette for sunny days
-- Manual theme selection for privacy-conscious users
+- Multi-modal journey planning (walking, trains, buses)
+- Offline maps using OpenStreetMap and Leaflet
+- Real-time location tracking and updates
 
-### 📰 News & Alerts
-- Transport-related news feed
-- Fare change notifications
-- Government program updates (e.g., "Libreng Sakay")
-- Official DOTr announcements
+### News and Alerts
 
-## 🏗️ Technology Stack
+- Real-time news feed with categorized updates
+- Service alerts with severity levels
+- Fare change notifications and government program updates
+- Official announcements and tabbed news interface
+
+### User Management and Authentication
+
+- Supabase-powered authentication with NextAuth integration
+- User profiles with customizable preferences
+- Favorite locations and search history management
+- Role-based access control (user, admin, super_admin)
+- Sign-in required for full app functionality
+
+### Administration and Analytics
+
+- Comprehensive admin dashboard with real-time statistics
+- User and admin management with analytics
+- Content management for news and alerts
+- Protected admin routes with authentication guards
+
+### Location Services
+
+- Favorite locations with category management
+- Search history with frequency tracking
+- Location-based services with GPS integration
+- Offline location storage and privacy controls
+
+### Data Analytics
+
+- Interactive charts and data tables
+- Sorting, filtering, and pagination
+- Real-time statistics and export capabilities
+
+### User Interface and Accessibility
+
+- Shadcn UI components with Radix UI primitives
+- Responsive design for all device sizes
+- Accessibility features (high contrast, large text, screen reader support)
+- Dark and light mode support
+
+## Technology Stack
 
 ### Web Application
-- **Framework**: Next.js 14 with TypeScript
-- **UI Library**: Shadcn UI + Radix UI
-- **Styling**: Tailwind CSS
-- **State Management**: Zustand
-- **Maps**: Google Maps API + Leaflet (offline)
-- **Forms**: React Hook Form + Zod validation
 
-### Mobile Application
-- **Framework**: React Native (planned)
-- **UI**: Custom "Thumb-First Glance" design
-- **Navigation**: Gesture-driven bottom sheets
-- **Offline Support**: Local storage + offline maps
+- **Framework**: Next.js 15 with TypeScript
+- **UI Library**: Shadcn UI and Radix UI
+- **Styling**: Tailwind CSS
+- **State Management**: Zustand and React Context
+- **Maps**: Leaflet and OpenStreetMap
+- **Forms**: React Hook Form and Zod validation
+- **Charts**: Recharts
+- **Tables**: TanStack Table
+- **Authentication**: NextAuth.js and Supabase Auth
+- **Database**: Supabase PostgreSQL
+- **Real-time**: Supabase real-time subscriptions
 
 ### Development Tools
-- **Testing**: Jest + React Testing Library
-- **Storybook**: Component documentation
-- **Linting**: ESLint + Prettier
-- **Type Checking**: TypeScript
 
-## 🚀 Getting Started
+- **Testing**: Jest and React Testing Library
+- **Storybook**: Component documentation
+- **Linting**: ESLint and Prettier
+- **Type Checking**: TypeScript strict mode
+- **API**: RESTful API with Next.js API routes
+- **Build Tools**: Next.js 15 with App Router
+
+## Getting Started
 
 ### Prerequisites
-- Node.js 18+ 
-- npm 9+
+
+- Node.js 18 or higher
+- npm 9 or higher
 - Git
+- Supabase account (for authentication and database)
 
 ### Installation
 
-1. **Clone the repository**
+1. Clone the repository:
    ```bash
    git clone https://github.com/your-username/philippine-commuters-companion.git
    cd philippine-commuters-companion
    ```
-
-2. **Install dependencies**
+2. Install dependencies:
    ```bash
+   cd website
    npm install
    ```
-
-3. **Set up environment variables**
+3. Set up environment variables:
    ```bash
    cp .env.example .env.local
    ```
-   
-   Edit `.env.local` with your API keys:
-   ```env
-   NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_google_maps_api_key
-   NEXT_PUBLIC_OPENWEATHER_API_KEY=your_openweather_api_key
-   ```
-
-4. **Start the development server**
+   Edit `.env.local` with your API keys.
+4. Set up the database:
+   - Run the Supabase setup scripts provided in `supabase-setup.sql` and `supabase-admin-setup.sql` using the Supabase SQL editor.
+5. Start the development server:
    ```bash
    npm run dev
    ```
-
-5. **Open your browser**
-   Navigate to [http://localhost:3000](http://localhost:3000)
+6. Open your browser and navigate to [http://localhost:3000](http://localhost:3000)
 
 ### Available Scripts
 
-```bash
-# Development
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run start        # Start production server
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+- `npm run type-check` - Run TypeScript checks
+- `npm run test` - Run tests
+- `npm run test:watch` - Run tests in watch mode
+- `npm run storybook` - Start Storybook
+- `npm run build-storybook` - Build Storybook
+- `npm run db:setup` - Set up database tables
+- `npm run db:seed` - Seed with sample data
 
-# Code Quality
-npm run lint         # Run ESLint
-npm run type-check   # Run TypeScript checks
-npm run test         # Run tests
-npm run test:watch   # Run tests in watch mode
+## Platform Support
 
-# Storybook
-npm run storybook    # Start Storybook
-npm run build-storybook # Build Storybook
+### Phase 1: Web Application
 
-# Mobile (when implemented)
-npm run mobile:dev   # Start mobile development
-npm run mobile:build # Build mobile app
-```
-
-## 📱 Platform Support
-
-### Phase 1: Web Application ✅
 - Responsive desktop website
 - Progressive Web App (PWA) features
 - Offline functionality
+- Admin dashboard
+- User authentication
 
-### Phase 2: Android APK 📱
+### Phase 2: Android APK
+
 - Direct APK distribution via GitHub Releases
 - Built-in update checker
-- No Play Store fees initially
 
-### Phase 3: App Store Launch 🏪
+### Phase 3: App Store Launch
+
 - Google Play Store
 - Apple App Store
-- Official distribution channels
 
-## 🎨 Design System
-
-### Color Palettes
-
-#### Malamig na Umaga (Cloudy)
-```css
---primary: #6B7280    /* Cool gray */
---secondary: #9CA3AF  /* Light gray */
---accent: #3B82F6     /* Blue */
---background: #F9FAFB /* Off-white */
-```
-
-#### Ambon (Rainy)
-```css
---primary: #1E40AF    /* Deep blue */
---secondary: #3B82F6  /* Medium blue */
---accent: #60A5FA     /* Light blue */
---background: #EFF6FF /* Blue-tinted white */
-```
-
-#### Araw ng Tanghali (Sunny)
-```css
---primary: #F59E0B    /* Warm orange */
---secondary: #FBBF24  /* Light orange */
---accent: #FCD34D     /* Yellow */
---background: #FFFBEB /* Warm white */
-```
+## Design System
 
 ### UI Components
-- **Timeline View**: Chronological travel options (desktop)
-- **Thumb-First Glance**: Gesture-driven interface (mobile)
-- **Weather Cards**: Dynamic transport information
-- **Route Polyline**: Interactive journey visualization
 
-## 🤝 Contributing
+- Timeline View (desktop)
+- Gesture-driven interface (mobile)
+- Transport Cards
+- Route Polyline
+- Admin Dashboard
+- News Feed
 
-We welcome contributions from the community! Here's how you can help:
+## Authentication and Administration
 
-### Ways to Contribute
-1. **Report Bugs**: Create an issue with detailed descriptions
-2. **Feature Requests**: Suggest new features or improvements
-3. **Code Contributions**: Submit pull requests
-4. **Documentation**: Improve docs and add examples
-5. **Testing**: Help test features and report issues
-6. **Design**: Contribute UI/UX improvements
+### User Features
+
+- Sign up/sign in with email and password
+- Profile management
+- Favorite locations
+- Search history
+- Offline mode
+
+### Admin Features
+
+- Admin dashboard with real-time statistics
+- User management and analytics
+- Content management for news and alerts
+- System monitoring
+- Role-based permissions
+
+### Security Features
+
+- JWT-based authentication
+- Protected routes
+- Role-based access control
+- Input validation
+- CSRF protection and security headers
+
+## Data Management
+
+### User Data
+
+- Favorite locations
+- Search history
+- User preferences
+- Privacy settings
+
+### Transport Data
+
+- Station information
+- Line data
+- Real-time updates
+- Service alerts
+
+### Analytics Data
+
+- User engagement metrics
+- Transport usage statistics
+- System performance monitoring
+- Error tracking
+
+## Contributing
+
+Contributions from the community are welcome. Please follow the guidelines below:
+
+### How to Contribute
+
+1. Report bugs by creating an issue with detailed descriptions.
+2. Suggest new features or improvements.
+3. Submit pull requests for code contributions.
+4. Improve documentation and add examples.
+5. Assist with testing and reporting issues.
+6. Contribute to UI/UX improvements.
+7. Help improve the admin dashboard.
+8. Contribute transport data and updates.
 
 ### Development Workflow
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Make your changes and add tests
-4. Commit your changes: `git commit -m 'Add amazing feature'`
-5. Push to the branch: `git push origin feature/amazing-feature`
-6. Open a Pull Request
+
+1. Fork the repository.
+2. Create a feature branch: `git checkout -b feature/your-feature`.
+3. Make your changes and add tests.
+4. Commit your changes: `git commit -m 'feat: add your feature'`.
+5. Push to the branch: `git push origin feature/your-feature`.
+6. Open a Pull Request.
 
 ### Code Standards
-- Follow TypeScript best practices
-- Use ESLint and Prettier for code formatting
-- Write tests for new features
-- Update documentation as needed
-- Follow conventional commit messages
 
-## 📊 Project Roadmap
+- Use TypeScript strict mode and proper types.
+- Follow functional component patterns in React.
+- Use Tailwind CSS for styling.
+- Aim for high test coverage.
+- Optimize for performance and accessibility.
 
-### Phase 1: MVP (Current)
-- [x] Project setup and documentation
-- [ ] Basic web application structure
-- [ ] Weather-adaptive UI system
-- [ ] Manual route data for 2-3 Metro Manila routes
-- [ ] Basic map integration
+## License
 
-### Phase 2: Community Features
-- [ ] User reporting system for transport data
-- [ ] Crowdsourced crowd levels
-- [ ] Service disruption alerts
-- [ ] News feed integration
-- [ ] Offline map support
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-### Phase 3: Mobile Launch
-- [ ] React Native mobile app
-- [ ] APK distribution system
-- [ ] In-app update checker
-- [ ] Enhanced offline functionality
+## Acknowledgments
 
-### Phase 4: Advanced Features
-- [ ] GTFS data integration
-- [ ] Machine learning for route optimization
-- [ ] Voice navigation
-- [ ] Accessibility improvements
-
-## 🔒 Privacy & Security
-
-### Data Collection
-- **No personal data collected**
-- **No user accounts required**
-- **Location data is ephemeral** (session-only)
-- **All data stored locally** on user devices
-
-### Privacy Features
-- Anonymous community reporting
-- Local storage only
-- No tracking or analytics
-- Transparent data handling
-
-## 🌐 API Integrations
-
-### Free Tier Services
-- **Maps**: Google Maps API (free tier)
-- **Weather**: OpenWeatherMap API (free tier)
-- **Hosting**: Vercel (free tier)
-- **APK Distribution**: GitHub Releases (free)
-
-### Community Data Sources
-- **Transport Data**: Community reports
-- **News**: RSS feeds from official sources
-- **Alerts**: Manual curation + community input
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- **DOTr** for transport information
-- **OpenStreetMap** for offline map data
-- **Shadcn UI** for the component library
-- **Vercel** for hosting
-- **GitHub** for open source hosting
-
-## 📞 Support & Community
-
-- **Discussions**: [GitHub Discussions](https://github.com/your-username/philippine-commuters-companion/discussions)
-- **Issues**: [GitHub Issues](https://github.com/your-username/philippine-commuters-companion/issues)
-- **Contributing**: [CONTRIBUTING.md](CONTRIBUTING.md)
-- **Code of Conduct**: [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
-
-## 🌟 Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=your-username/philippine-commuters-companion&type=Date)](https://star-history.com/#your-username/philippine-commuters-companion&Date)
-
----
-
-**Made with ❤️ for Filipino commuters**
-
-*Help us make commuting in the Philippines better, one journey at a time.* 
+- Supabase for authentication and database services
+- Shadcn UI for the component library
+- OpenStreetMap for map data
+- The Philippine transport community for feedback and support
+- All contributors who help improve this project
