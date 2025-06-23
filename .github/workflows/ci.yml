@@ -2,9 +2,9 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   # Lint and type check
@@ -17,8 +17,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
+          node-version: "18"
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci
@@ -27,7 +27,7 @@ jobs:
         run: npm run lint
 
       - name: Run TypeScript check
-        run: npm run type-check
+        run: npm run type-check --workspace=website
 
       - name: Run Prettier check
         run: npx prettier --check .
@@ -42,8 +42,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
+          node-version: "18"
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci
@@ -66,8 +66,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
+          node-version: "18"
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci
@@ -99,7 +99,7 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-args: '--prod'
+          vercel-args: "--prod"
 
   # Security audit
   security:
@@ -111,8 +111,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
+          node-version: "18"
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci
@@ -149,8 +149,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
+          node-version: "18"
+          cache: "npm"
 
       - name: Install dependencies
         run: |
@@ -188,21 +188,21 @@ jobs:
           release_name: Release ${{ github.ref }}
           body: |
             ## What's Changed
-            
+
             ### Features
             - Add new features here
-            
+
             ### Fixes
             - Add bug fixes here
-            
+
             ### Improvements
             - Add improvements here
-            
+
             ## Download
-            
+
             ### Web Application
             Visit: https://philippine-commuters-companion.vercel.app
-            
+
             ### Mobile Application
             Download the latest APK from the assets below.
           draft: false
@@ -231,4 +231,4 @@ jobs:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           status: ${{ job.status }}
           title: "Philippine Commuter's Companion"
-          description: "Deployment completed successfully! 🚇🇵🇭" 
+          description: "Deployment completed successfully! 🚇🇵🇭"
