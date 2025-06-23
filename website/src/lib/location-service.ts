@@ -28,7 +28,9 @@ export class LocationService {
   // Favorite Locations
   static async getFavoriteLocations(userId: string): Promise<FavoriteLocation[]> {
     if (!supabase) {
-      console.warn('Supabase not available. Returning empty favorite locations.')
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('Supabase not available. Returning empty favorite locations.')
+      }
       return []
     }
 
@@ -39,7 +41,9 @@ export class LocationService {
       .order('created_at', { ascending: false })
 
     if (error) {
-      console.error('Error fetching favorite locations:', error)
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error fetching favorite locations:', error)
+      }
       throw error
     }
 
@@ -52,7 +56,9 @@ export class LocationService {
     category: 'home' | 'work' | 'school' | 'other' = 'other'
   ): Promise<FavoriteLocation> {
     if (!supabase) {
-      console.warn('Supabase not available. Cannot add favorite location.')
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('Supabase not available. Cannot add favorite location.')
+      }
       throw new Error('Database not available')
     }
 
@@ -70,7 +76,9 @@ export class LocationService {
       .single()
 
     if (error) {
-      console.error('Error adding favorite location:', error)
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error adding favorite location:', error)
+      }
       throw error
     }
 
@@ -79,7 +87,9 @@ export class LocationService {
 
   static async removeFavoriteLocation(userId: string, locationId: string): Promise<void> {
     if (!supabase) {
-      console.warn('Supabase not available. Cannot remove favorite location.')
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('Supabase not available. Cannot remove favorite location.')
+      }
       return
     }
 
@@ -90,7 +100,9 @@ export class LocationService {
       .eq('user_id', userId)
 
     if (error) {
-      console.error('Error removing favorite location:', error)
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error removing favorite location:', error)
+      }
       throw error
     }
   }
@@ -101,7 +113,9 @@ export class LocationService {
     updates: Partial<Pick<FavoriteLocation, 'name' | 'address' | 'category'>>
   ): Promise<FavoriteLocation> {
     if (!supabase) {
-      console.warn('Supabase not available. Cannot update favorite location.')
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('Supabase not available. Cannot update favorite location.')
+      }
       throw new Error('Database not available')
     }
 
@@ -114,7 +128,9 @@ export class LocationService {
       .single()
 
     if (error) {
-      console.error('Error updating favorite location:', error)
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error updating favorite location:', error)
+      }
       throw error
     }
 
@@ -124,7 +140,9 @@ export class LocationService {
   // Search History
   static async getSearchHistory(userId: string): Promise<SearchHistoryItem[]> {
     if (!supabase) {
-      console.warn('Supabase not available. Returning empty search history.')
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('Supabase not available. Returning empty search history.')
+      }
       return []
     }
 
@@ -136,7 +154,9 @@ export class LocationService {
       .limit(20)
 
     if (error) {
-      console.error('Error fetching search history:', error)
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error fetching search history:', error)
+      }
       throw error
     }
 
@@ -148,7 +168,9 @@ export class LocationService {
     location: Omit<Location, 'address'> & { address?: string }
   ): Promise<SearchHistoryItem> {
     if (!supabase) {
-      console.warn('Supabase not available. Cannot add to search history.')
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('Supabase not available. Cannot add to search history.')
+      }
       throw new Error('Database not available')
     }
 
@@ -176,7 +198,9 @@ export class LocationService {
         .single()
 
       if (error) {
-        console.error('Error updating search history:', error)
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Error updating search history:', error)
+        }
         throw error
       }
 
@@ -198,7 +222,9 @@ export class LocationService {
         .single()
 
       if (error) {
-        console.error('Error adding to search history:', error)
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Error adding to search history:', error)
+        }
         throw error
       }
 
@@ -208,7 +234,9 @@ export class LocationService {
 
   static async clearSearchHistory(userId: string): Promise<void> {
     if (!supabase) {
-      console.warn('Supabase not available. Cannot clear search history.')
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('Supabase not available. Cannot clear search history.')
+      }
       return
     }
 
@@ -218,14 +246,18 @@ export class LocationService {
       .eq('user_id', userId)
 
     if (error) {
-      console.error('Error clearing search history:', error)
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error clearing search history:', error)
+      }
       throw error
     }
   }
 
   static async removeFromSearchHistory(userId: string, historyId: string): Promise<void> {
     if (!supabase) {
-      console.warn('Supabase not available. Cannot remove from search history.')
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('Supabase not available. Cannot remove from search history.')
+      }
       return
     }
 
@@ -236,7 +268,9 @@ export class LocationService {
       .eq('user_id', userId)
 
     if (error) {
-      console.error('Error removing from search history:', error)
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error removing from search history:', error)
+      }
       throw error
     }
   }

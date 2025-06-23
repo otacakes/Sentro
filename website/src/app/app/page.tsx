@@ -24,8 +24,13 @@ function PageContent() {
   const searchParams = useSearchParams()
   const view = searchParams.get('view') || 'map'
 
-  const handleBackToSearch = () => console.log("Back to search clicked")
-  const handleViewMap = () => console.log("View on map clicked")
+  const handleBackToSearch = () => {
+    // Navigate back to search functionality
+  }
+  
+  const handleViewMap = () => {
+    // Navigate to map view
+  }
 
   switch (view) {
     case 'map':

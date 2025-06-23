@@ -3,12 +3,14 @@ import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
-// Check if Supabase credentials are available
 if (!supabaseUrl || !supabaseAnonKey) {
-  console.warn('Supabase credentials not found. Authentication features will be disabled.')
-  console.warn('To enable authentication, create a .env.local file with:')
-  console.warn('NEXT_PUBLIC_SUPABASE_URL=your_project_url')
-  console.warn('NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key')
+  // Only log in development environment
+  if (process.env.NODE_ENV === 'development') {
+    console.warn('Supabase credentials not found. Authentication features will be disabled.')
+    console.warn('To enable authentication, create a .env.local file with:')
+    console.warn('NEXT_PUBLIC_SUPABASE_URL=your_project_url')
+    console.warn('NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key')
+  }
 }
 
 // Create Supabase client with fallback for missing credentials

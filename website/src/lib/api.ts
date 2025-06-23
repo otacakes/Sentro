@@ -14,45 +14,52 @@ const apiClient = axios.create({
 export const transportAPI = {
   async getStations(): Promise<any[]> {
     try {
-      // For MVP, return mock data
-      // In production, this would fetch from a real API
-      return mockStations
+      const response = await axios.get(`${API_BASE_URL}/stations`)
+      return response.data
     } catch (error) {
-      console.error('Error fetching stations:', error)
-      return []
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error fetching stations:', error)
+      }
+      throw new Error('Failed to fetch stations')
     }
   },
 
   async getLines(): Promise<any[]> {
     try {
-      // For MVP, return mock data
-      return mockLines
+      const response = await axios.get(`${API_BASE_URL}/lines`)
+      return response.data
     } catch (error) {
-      console.error('Error fetching lines:', error)
-      return []
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error fetching lines:', error)
+      }
+      throw new Error('Failed to fetch transport lines')
     }
   },
 
   async getRoutes(origin: Location, destination: Location): Promise<Route[]> {
     try {
-      // For MVP, return mock routes
-      // In production, this would use a routing service
-      return mockRoutes(origin, destination)
+      const response = await axios.get(`${API_BASE_URL}/routes`)
+      return response.data
     } catch (error) {
-      console.error('Error fetching routes:', error)
-      return []
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error fetching routes:', error)
+      }
+      throw new Error('Failed to fetch routes')
     }
   },
 
   async submitCrowdReport(report: Omit<CrowdReport, 'id' | 'timestamp'>): Promise<boolean> {
     try {
-      // For MVP, just log the report
-      // In production, this would send to a backend service
-      console.log('Crowd report submitted:', report)
+      const response = await axios.post(`${API_BASE_URL}/crowd-reports`, report)
+      if (process.env.NODE_ENV === 'development') {
+        console.log('Crowd report submitted:', report)
+      }
       return true
     } catch (error) {
-      console.error('Error submitting crowd report:', error)
-      return false
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error submitting crowd report:', error)
+      }
+      throw new Error('Failed to submit crowd report')
     }
   },
 }
@@ -61,21 +68,25 @@ export const transportAPI = {
 export const newsAPI = {
   async getNews(): Promise<NewsItem[]> {
     try {
-      // For MVP, return mock news
-      return mockNewsItems
+      const response = await axios.get(`${API_BASE_URL}/news`)
+      return response.data
     } catch (error) {
-      console.error('Error fetching news:', error)
-      return []
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error fetching news:', error)
+      }
+      throw new Error('Failed to fetch news')
     }
   },
 
   async getServiceAlerts(): Promise<ServiceAlert[]> {
     try {
-      // For MVP, return mock alerts
-      return mockServiceAlerts
+      const response = await axios.get(`${API_BASE_URL}/alerts`)
+      return response.data
     } catch (error) {
-      console.error('Error fetching service alerts:', error)
-      return []
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error fetching service alerts:', error)
+      }
+      throw new Error('Failed to fetch service alerts')
     }
   },
 }

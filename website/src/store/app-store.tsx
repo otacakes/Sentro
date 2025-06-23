@@ -129,7 +129,9 @@ export function AppStoreProvider({ children }: { children: ReactNode }) {
       try {
         await LocationService.addToSearchHistory(user.id, location)
       } catch (error) {
-        console.error('Failed to save to search history:', error)
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Failed to save to search history:', error)
+        }
       }
     } else {
       const filtered = searchHistory.filter(
@@ -144,7 +146,9 @@ export function AppStoreProvider({ children }: { children: ReactNode }) {
       try {
         await LocationService.addFavoriteLocation(user.id, location, category)
       } catch (error) {
-        console.error('Failed to save favorite location:', error)
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Failed to save favorite location:', error)
+        }
         throw error
       }
     } else {
@@ -162,7 +166,9 @@ export function AppStoreProvider({ children }: { children: ReactNode }) {
       try {
         await LocationService.removeFavoriteLocation(user.id, locationId)
       } catch (error) {
-        console.error('Failed to remove favorite location:', error)
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Failed to remove favorite location:', error)
+        }
         throw error
       }
     } else {

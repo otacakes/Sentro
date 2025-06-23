@@ -6,15 +6,17 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 const nextAuthSecret = process.env.NEXTAUTH_SECRET
 
-// Check if required environment variables are available
+// Validate required environment variables
 if (!supabaseUrl || !supabaseServiceKey || !nextAuthSecret) {
-  console.error('🔴 CRITICAL: Missing required environment variables for authentication!')
-  if (!supabaseUrl) console.error('- NEXT_PUBLIC_SUPABASE_URL is missing.')
-  if (!supabaseServiceKey) console.error('- SUPABASE_SERVICE_ROLE_KEY is missing.')
-  if (!nextAuthSecret) console.error('- NEXTAUTH_SECRET is missing.')
-  console.error('➡️ Please create a .env.local file with these variables.')
-  console.error('➡️ See ENVIRONMENT_SETUP.md for detailed instructions.')
-  console.error('➡️ The application will not work correctly without them.')
+  if (process.env.NODE_ENV === 'development') {
+    console.error('🔴 CRITICAL: Missing required environment variables for authentication!')
+    if (!supabaseUrl) console.error('- NEXT_PUBLIC_SUPABASE_URL is missing.')
+    if (!supabaseServiceKey) console.error('- SUPABASE_SERVICE_ROLE_KEY is missing.')
+    if (!nextAuthSecret) console.error('- NEXTAUTH_SECRET is missing.')
+    console.error('➡️ Please create a .env.local file with these variables.')
+    console.error('➡️ See ENVIRONMENT_SETUP.md for detailed instructions.')
+    console.error('➡️ The application will not work correctly without them.')
+  }
 }
 
 // Only create Supabase client if environment variables are available
@@ -43,7 +45,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         }
 
         if (!supabase) {
-          console.error('Supabase client not available - check environment variables')
+          if (process.env.NODE_ENV === 'development') {
+            console.error('Supabase client not available - check environment variables')
+          }
           throw new Error('Authentication service not configured. Please check environment variables.')
         }
 
@@ -54,7 +58,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           })
 
           if (error) {
-            console.error('Authentication error:', error)
+            if (process.env.NODE_ENV === 'development') {
+              console.error('Authentication error:', error)
+            }
             
             // Handle specific Supabase auth errors
             if (error.message.includes('Invalid login credentials')) {
@@ -81,7 +87,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             image: data.user.user_metadata?.avatar_url,
           }
         } catch (error) {
-          console.error("Auth error:", error)
+          if (process.env.NODE_ENV === 'development') {
+            console.error("Auth error:", error)
+          }
           // Re-throw the error with the specific message
           throw error
         }
@@ -100,7 +108,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         session.user.id = token.id as string
       }
       return session
-    },
+    }
   },
   pages: {
     signIn: '/login',
