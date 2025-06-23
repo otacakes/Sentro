@@ -24,12 +24,14 @@ Related to #[issue-number]
 - [ ] Unit tests pass
 - [ ] Integration tests pass
 - [ ] Manual testing completed
-- [ ] Cross-browser testing (if applicable)
-- [ ] Mobile testing (if applicable)
+- [ ] Cross-browser testing (Chrome, Firefox, Safari, Edge)
+- [ ] Mobile responsiveness tested
+- [ ] Accessibility testing completed
 
 ### Test Scenarios
 
 Describe the test scenarios you've covered:
+
 - [ ] Scenario 1: [description]
 - [ ] Scenario 2: [description]
 - [ ] Scenario 3: [description]
@@ -39,9 +41,11 @@ Describe the test scenarios you've covered:
 If applicable, add screenshots to show the changes:
 
 ### Before
+
 ![Before screenshot](url-to-before-screenshot)
 
 ### After
+
 ![After screenshot](url-to-after-screenshot)
 
 ## 📱 Platform Testing
@@ -75,6 +79,7 @@ If applicable, add screenshots to show the changes:
 ## 🚀 Deployment Notes
 
 Any special notes for deployment:
+
 - Environment variables needed
 - Database migrations required
 - Configuration changes needed
@@ -108,7 +113,8 @@ If there are security implications, please describe:
 ## 🎨 Design Changes
 
 If this PR includes design changes:
-- [ ] Design follows the weather-adaptive theme system
+
+- [ ] Design follows the modern theme system
 - [ ] Design is responsive and mobile-friendly
 - [ ] Design maintains accessibility standards
 - [ ] Design has been reviewed by the team
@@ -116,6 +122,7 @@ If this PR includes design changes:
 ## 🌐 Localization
 
 If this PR includes text changes:
+
 - [ ] No text changes
 - [ ] Text changes are in English only
 - [ ] Text changes include Filipino translations
@@ -124,6 +131,7 @@ If this PR includes text changes:
 ## 📈 Analytics/Telemetry
 
 If this PR includes analytics or telemetry:
+
 - [ ] No analytics changes
 - [ ] Analytics changes are privacy-compliant
 - [ ] Analytics changes are documented
@@ -132,6 +140,7 @@ If this PR includes analytics or telemetry:
 ## 🔄 Breaking Changes
 
 If this PR includes breaking changes:
+
 - [ ] No breaking changes
 - [ ] Breaking changes are documented
 - [ ] Migration guide provided
@@ -143,4 +152,4 @@ Any additional information that reviewers should know:
 
 ---
 
-**Thank you for contributing to The Philippine Commuter's Companion!** 🚇🇵🇭 
+**Thank you for contributing to The Philippine Commuter's Companion!** 🚇🇵🇭

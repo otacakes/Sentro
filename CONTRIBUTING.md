@@ -36,6 +36,7 @@ We welcome various types of contributions:
 ### Local Development
 
 1. **Fork the repository**
+
    ```bash
    # Fork on GitHub first, then:
    git clone https://github.com/YOUR_USERNAME/philippine-commuters-companion.git
@@ -43,6 +44,7 @@ We welcome various types of contributions:
    ```
 
 2. **Set up the development environment**
+
    ```bash
    npm install
    cp .env.example .env.local
@@ -50,6 +52,7 @@ We welcome various types of contributions:
    ```
 
 3. **Start development server**
+
    ```bash
    npm run dev
    ```
@@ -96,13 +99,14 @@ npm run build         # Ensure build works
 Use conventional commit messages:
 
 ```bash
-git commit -m "feat: add weather-adaptive theme system"
+git commit -m "feat: add modern theme system"
 git commit -m "fix: resolve map loading issue on slow connections"
 git commit -m "docs: update installation instructions"
 git commit -m "test: add unit tests for route planning"
 ```
 
 **Commit Types:**
+
 - `feat`: New feature
 - `fix`: Bug fix
 - `docs`: Documentation changes
@@ -118,6 +122,7 @@ git push origin feature/your-feature-name
 ```
 
 Then create a Pull Request on GitHub with:
+
 - Clear title and description
 - Reference to related issues
 - Screenshots for UI changes
@@ -148,219 +153,104 @@ src/
 
 ### Component Guidelines
 
-- Use Shadcn UI components when possible
-- Create custom components for unique features
-- Follow the weather-adaptive design system
-- Ensure accessibility (ARIA labels, keyboard navigation)
-- Add Storybook stories for complex components
+- Use functional components with hooks
+- Follow the established naming conventions
+- Include proper TypeScript types
+- Add JSDoc comments for complex components
+- Follow the modern design system
+- Test weather-adaptive features
+- Ensure accessibility compliance
+- Optimize for mobile devices
+
+### Design Guidelines
+
+- Follow the established color palette
+- Use consistent spacing and typography
+- Ensure proper contrast ratios
+- Test on multiple screen sizes
+- Follow accessibility guidelines
+- Use modern design patterns
+- Test modern design features
+- Ensure responsive design
 
 ### Testing Guidelines
 
-- Write unit tests for utility functions
-- Write integration tests for components
-- Test weather-adaptive features
-- Test offline functionality
-- Test on different screen sizes
+- Write unit tests for all components
+- Include integration tests for user flows
+- Test accessibility features
+- Verify cross-browser compatibility
+- Test modern design features
+- Ensure mobile responsiveness
+- Validate performance metrics
+- Check error handling
 
-## 🎨 Design Contributions
+## 🚀 Quick Start for Contributors
 
-### Weather-Adaptive Design System
+### 1. Fork and Clone
 
-When contributing to the UI:
-
-1. **Follow Color Palettes**:
-   - Malamig na Umaga (Cloudy): Cool grays and blues
-   - Ambon (Rainy): Deep blues and soothing tones
-   - Araw ng Tanghali (Sunny): Warm oranges and yellows
-
-2. **Accessibility**:
-   - Ensure sufficient color contrast
-   - Support keyboard navigation
-   - Provide alternative text for images
-   - Test with screen readers
-
-3. **Mobile-First**:
-   - Design for thumb navigation
-   - Consider one-handed usage
-   - Optimize for small screens
-
-### UI Components
-
-- Use the existing component library
-- Create new components following the design system
-- Add Storybook documentation
-- Include accessibility features
-
-## 📊 Data Contributions
-
-### Transport Data
-
-We welcome contributions of:
-
-- **Route Information**: Bus routes, train lines, jeepney routes
-- **Station Data**: Locations, facilities, accessibility
-- **Schedule Information**: Operating hours, frequency
-- **Fare Information**: Current fares, discounts
-
-### News and Alerts
-
-- **Transport News**: Updates from DOTr, LTFRB, etc.
-- **Service Alerts**: Disruptions, maintenance, changes
-- **Government Programs**: Libreng Sakay, fare subsidies
-
-## 🌐 Localization
-
-### Filipino Language Support
-
-Help translate the app to:
-
-- **Tagalog**: Standard Filipino
-- **Regional Dialects**: Cebuano, Ilocano, etc.
-- **English**: For international users
-
-### Translation Guidelines
-
-- Use natural, conversational language
-- Consider cultural context
-- Maintain consistency in terminology
-- Test with native speakers
-
-## 🐛 Bug Reports
-
-### Before Reporting
-
-1. Check existing issues
-2. Try to reproduce the bug
-3. Test on different devices/browsers
-4. Check the console for errors
-
-### Bug Report Template
-
-```markdown
-**Bug Description**
-Brief description of the issue
-
-**Steps to Reproduce**
-1. Go to...
-2. Click on...
-3. See error
-
-**Expected Behavior**
-What should happen
-
-**Actual Behavior**
-What actually happens
-
-**Environment**
-- Device: [e.g., iPhone 12, Samsung Galaxy]
-- OS: [e.g., iOS 15, Android 12]
-- Browser: [e.g., Chrome 96, Safari 15]
-- App Version: [e.g., 1.0.0]
-
-**Screenshots**
-Add screenshots if applicable
-
-**Additional Context**
-Any other relevant information
+```bash
+git clone https://github.com/your-username/philippine-commuters-companion.git
+cd philippine-commuters-companion
 ```
 
-## 💡 Feature Requests
+### 2. Install Dependencies
 
-### Before Requesting
-
-1. Check existing feature requests
-2. Consider the project's scope
-3. Think about implementation complexity
-4. Consider privacy implications
-
-### Feature Request Template
-
-```markdown
-**Feature Description**
-Brief description of the feature
-
-**Problem Statement**
-What problem does this solve?
-
-**Proposed Solution**
-How should this work?
-
-**Alternative Solutions**
-Other ways to solve this problem
-
-**Additional Context**
-Screenshots, mockups, examples
+```bash
+npm install
+cd website
+npm install
 ```
 
-## 📋 Pull Request Process
+### 3. Set Up Environment
 
-### Before Submitting
-
-1. **Self-Review**: Check your own code
-2. **Tests**: Ensure all tests pass
-3. **Documentation**: Update relevant docs
-4. **Screenshots**: Add screenshots for UI changes
-
-### PR Template
-
-```markdown
-## Description
-Brief description of changes
-
-## Type of Change
-- [ ] Bug fix
-- [ ] New feature
-- [ ] Documentation update
-- [ ] Performance improvement
-- [ ] Refactoring
-
-## Testing
-- [ ] Unit tests pass
-- [ ] Integration tests pass
-- [ ] Manual testing completed
-- [ ] Cross-browser testing
-
-## Screenshots
-Add screenshots for UI changes
-
-## Checklist
-- [ ] Code follows style guidelines
-- [ ] Self-review completed
-- [ ] Documentation updated
-- [ ] No breaking changes
+```bash
+cp .env.example .env.local
+# Edit .env.local with your API keys
 ```
 
-## 🏆 Recognition
+### 4. Start Development
 
-Contributors will be recognized in:
+```bash
+npm run dev
+```
 
-- **README.md**: Contributors section
-- **Release Notes**: For significant contributions
-- **GitHub Profile**: Through contribution graph
-- **Community**: In discussions and announcements
+### 5. Run Tests
 
-## 📞 Getting Help
+```bash
+npm run test
+npm run lint
+npm run type-check
+```
 
-### Questions and Support
+## 📋 Issue Templates
 
-- **GitHub Discussions**: For general questions
-- **GitHub Issues**: For bugs and feature requests
-- **Discord/Slack**: Community chat (if available)
-- **Email**: For private matters
+We provide issue templates for:
 
-### Mentorship
+- Bug reports
+- Feature requests
+- Documentation improvements
+- Performance issues
+- Accessibility concerns
 
-New contributors can:
+Please use the appropriate template when creating issues.
 
-- Ask for help in discussions
-- Request code reviews
-- Join pair programming sessions
-- Get guidance on complex features
+## 🤝 Code Review Process
 
-## 🎉 Thank You!
+1. **Self-Review**: Review your own code before submitting
+2. **Peer Review**: At least one other contributor must review
+3. **CI Checks**: All automated tests must pass
+4. **Documentation**: Update docs for new features
+5. **Final Approval**: Maintainer approval required
 
-Thank you for contributing to The Philippine Commuter's Companion! Your contributions help make commuting better for millions of Filipinos.
+## 🎉 Recognition
+
+Contributors are recognized through:
+
+- GitHub contributor graph
+- Release notes acknowledgments
+- Contributor hall of fame
+- Special thanks in documentation
 
 ---
 
-*Together, we're building a better future for Philippine commuters.* 🚇🇵🇭 
+**Thank you for helping us improve The Philippine Commuter's Companion!** 🚇🇵🇭
