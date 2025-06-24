@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useSearchParams, useRouter } from 'next/navigation'
+import { useBetterAuth } from './better-auth-provider'
 import { AuthModal } from './auth-modal'
 
 /**
@@ -9,51 +9,25 @@ import { AuthModal } from './auth-modal'
  * based on URL search parameters.
  */
 export function AuthModalController() {
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const [isOpen, setIsOpen] = useState(false)
+  const { user, loading } = useBetterAuth()
+  const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
-    // Check if the 'login' or 'signup' param is present in the URL
-    if (searchParams.has('login') || searchParams.has('signup')) {
-      setIsOpen(true)
-    } else {
-      setIsOpen(false)
+    // Show modal if user is not authenticated and not loading
+    if (!loading && !user) {
+      setShowModal(true)
+    } else if (user) {
+      setShowModal(false)
     }
-  }, [searchParams])
+  }, [user, loading])
 
-  const handleClose = () => {
-    const redirectUrl = searchParams.get('redirect')
-    if (redirectUrl) {
-      router.replace('/')
-      return
-    }
-
-    // Remove the query params from the URL to hide the modal
-    const newParams = new URLSearchParams(searchParams.toString())
-    newParams.delete('login')
-    newParams.delete('signup')
-    newParams.delete('redirect')
-    
-    const newUrl = `${window.location.pathname}?${newParams.toString()}`.replace(/\?$/, '')
-    router.replace(newUrl)
-    setIsOpen(false)
+  if (loading) {
+    return null
   }
 
-  const handleSuccess = () => {
-    const redirectUrl = searchParams.get('redirect')
-    handleClose()
-    if (redirectUrl) {
-      router.push(redirectUrl)
-    }
+  if (!user) {
+    return <AuthModal isOpen={showModal} onClose={() => setShowModal(false)} />
   }
 
-  return (
-    <AuthModal
-      isOpen={isOpen}
-      onClose={handleClose}
-      onSuccess={handleSuccess}
-      defaultMode={searchParams.has('signup') ? 'signup' : 'signin'}
-    />
-  )
+  return null
 } 

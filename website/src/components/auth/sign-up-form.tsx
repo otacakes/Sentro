@@ -1,58 +1,38 @@
-'use client'
+"use client"
 
 import { useState } from 'react'
-import { useBetterAuth } from './better-auth-provider'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Loader2 } from 'lucide-react'
+import { useBetterAuth } from './better-auth-provider'
 import { toast } from 'sonner'
 
-interface SignUpFormProps {
-  onSuccess?: () => void
-  onSwitchToSignIn?: () => void
-}
-
-export function SignUpForm({ onSuccess, onSwitchToSignIn }: SignUpFormProps) {
+export function SignUpForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [fullName, setFullName] = useState('')
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
-  const [loading, setLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const { signUp } = useBetterAuth()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setError('')
-    setSuccess('')
-    setLoading(true)
+    setIsLoading(true)
 
     try {
-      // Get CSRF token from meta tag or previous response
-      const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') ||
-                       localStorage.getItem('csrf-token')
-
-      const { error } = await signUp(email, password, fullName, csrfToken)
+      const { error } = await signUp(email, password, fullName)
       
       if (error) {
-        if (error.message.includes('Account created successfully')) {
-          setSuccess('Account created successfully! Please sign in with your new credentials.')
-          setEmail('')
-          setPassword('')
-          setFullName('')
-        } else {
-          setError(error.message || 'Sign up failed')
-        }
+        toast.error(error.message || 'Failed to create account')
       } else {
-        setSuccess('Account created successfully! Welcome!')
-        onSuccess?.()
+        toast.success('Account created successfully!')
+        setEmail('')
+        setPassword('')
+        setFullName('')
       }
-    } catch (err) {
-      setError('An unexpected error occurred')
+    } catch (error) {
+      toast.error('Failed to create account. Please try again.')
     } finally {
-      setLoading(false)
+      setIsLoading(false)
     }
   }
 
@@ -69,7 +49,7 @@ export function SignUpForm({ onSuccess, onSwitchToSignIn }: SignUpFormProps) {
           required
         />
       </div>
-
+      
       <div className="space-y-2">
         <Label htmlFor="email">Email</Label>
         <Input
@@ -94,36 +74,10 @@ export function SignUpForm({ onSuccess, onSwitchToSignIn }: SignUpFormProps) {
           minLength={6}
         />
       </div>
-
-      {error && (
-        <Alert variant="destructive">
-          <AlertDescription>{error}</AlertDescription>
-        </Alert>
-      )}
-
-      {success && (
-        <Alert variant="default">
-          <AlertDescription>{success}</AlertDescription>
-        </Alert>
-      )}
-
-      <Button type="submit" className="w-full" disabled={loading}>
-        {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-        Sign Up
+      
+      <Button type="submit" className="w-full" disabled={isLoading}>
+        {isLoading ? 'Creating Account...' : 'Create Account'}
       </Button>
-
-      {onSwitchToSignIn && (
-        <div className="text-center text-sm">
-          <span className="text-muted-foreground">Already have an account? </span>
-          <button
-            type="button"
-            onClick={onSwitchToSignIn}
-            className="text-primary hover:underline"
-          >
-            Sign in
-          </button>
-        </div>
-      )}
     </form>
   )
 } 

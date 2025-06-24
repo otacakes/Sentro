@@ -4,7 +4,6 @@ const nextConfig = {
   experimental: {
     optimizeCss: true,
     scrollRestoration: true,
-    appDir: true,
   },
   images: {
     domains: [
