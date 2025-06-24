@@ -1,42 +1,54 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { createClient } from '@supabase/supabase-js'
+import { withCSRF } from '@/lib/csrf'
 
-export async function GET(request: NextRequest) {
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+
+if (!supabaseUrl || !supabaseServiceKey) {
+  throw new Error('Missing Supabase environment variables')
+}
+
+const supabase = createClient(supabaseUrl, supabaseServiceKey)
+
+async function usersHandler(request: NextRequest) {
   try {
-    if (!supabase) {
-      return NextResponse.json(
-        { error: 'Database connection not available' },
-        { status: 500 }
-      )
-    }
-
-    // Get all admin users
-    const { data: adminUsers, error } = await supabase
-      .from('admin_users')
-      .select('*')
-      .order('created_at', { ascending: false })
+    const { data: users, error } = await supabase.auth.admin.listUsers()
 
     if (error) {
-      console.error('Error fetching admin users:', error)
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error fetching users:', error)
+      }
       return NextResponse.json(
-        { error: 'Failed to fetch admin users' },
+        { error: 'Failed to fetch users' },
         { status: 500 }
       )
     }
 
-    return NextResponse.json({
-      success: true,
-      data: adminUsers || []
-    })
+    // Filter out sensitive information
+    const safeUsers = users.users.map(user => ({
+      id: user.id,
+      email: user.email,
+      fullName: user.user_metadata?.full_name || 'N/A',
+      createdAt: user.created_at,
+      lastSignIn: user.last_sign_in_at,
+      isConfirmed: user.email_confirmed_at !== null
+    }))
+
+    return NextResponse.json({ users: safeUsers })
 
   } catch (error) {
-    console.error('Error fetching admin users:', error)
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Users API error:', error)
+    }
     return NextResponse.json(
-      { error: 'Failed to fetch admin users' },
+      { error: 'Internal server error' },
       { status: 500 }
     )
   }
 }
+
+export const GET = withCSRF(usersHandler)
 
 export async function POST(request: NextRequest) {
   try {

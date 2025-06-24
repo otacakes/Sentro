@@ -8,8 +8,8 @@ interface AuthContextType {
   user: User | null
   session: Session | null
   loading: boolean
-  signIn: (email: string, password: string) => Promise<{ error: any }>
-  signUp: (email: string, password: string, fullName?: string) => Promise<{ error: any }>
+  signIn: (email: string, password: string, csrfToken?: string) => Promise<{ error: any }>
+  signUp: (email: string, password: string, fullName?: string, csrfToken?: string) => Promise<{ error: any }>
   signOut: () => Promise<void>
   resetPassword: (email: string) => Promise<{ error: any }>
 }
@@ -59,33 +59,64 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
-  const signIn = async (email: string, password: string) => {
-    if (!supabase) {
-      return { error: { message: 'Authentication is not available. Please set up Supabase credentials.' } }
+  const signIn = async (email: string, password: string, csrfToken?: string) => {
+    try {
+      const response = await fetch('/api/auth/signin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(csrfToken && { 'x-csrf-token': csrfToken })
+        },
+        body: JSON.stringify({ email, password })
+      })
+
+      const data = await response.json()
+
+      // Store CSRF token from response headers
+      const responseCsrfToken = response.headers.get('x-csrf-token')
+      if (responseCsrfToken) {
+        localStorage.setItem('csrf-token', responseCsrfToken)
+      }
+
+      if (!response.ok) {
+        return { error: data.error || 'Failed to sign in' }
+      }
+
+      // Update user state
+      setUser(data.user)
+      return { error: null }
+    } catch (error) {
+      return { error: 'Network error. Please try again.' }
     }
-    
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    })
-    return { error }
   }
 
-  const signUp = async (email: string, password: string, fullName?: string) => {
-    if (!supabase) {
-      return { error: { message: 'Authentication is not available. Please set up Supabase credentials.' } }
-    }
-    
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          full_name: fullName,
+  const signUp = async (email: string, password: string, fullName?: string, csrfToken?: string) => {
+    try {
+      const response = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(csrfToken && { 'x-csrf-token': csrfToken })
         },
-      },
-    })
-    return { error }
+        body: JSON.stringify({ email, password, fullName })
+      })
+
+      const data = await response.json()
+
+      // Store CSRF token from response headers
+      const responseCsrfToken = response.headers.get('x-csrf-token')
+      if (responseCsrfToken) {
+        localStorage.setItem('csrf-token', responseCsrfToken)
+      }
+
+      if (!response.ok) {
+        return { error: data.error || 'Failed to create account' }
+      }
+
+      return { error: null }
+    } catch (error) {
+      return { error: 'Network error. Please try again.' }
+    }
   }
 
   const signOut = async () => {

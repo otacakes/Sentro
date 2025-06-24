@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Loader2 } from 'lucide-react'
+import { toast } from 'sonner'
 
 interface SignUpFormProps {
   onSuccess?: () => void
@@ -29,7 +30,11 @@ export function SignUpForm({ onSuccess, onSwitchToSignIn }: SignUpFormProps) {
     setLoading(true)
 
     try {
-      const { error } = await signUp(email, password, fullName)
+      // Get CSRF token from meta tag or previous response
+      const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') ||
+                       localStorage.getItem('csrf-token')
+
+      const { error } = await signUp(email, password, fullName, csrfToken)
       
       if (error) {
         if (error.message.includes('Account created successfully')) {
@@ -86,6 +91,7 @@ export function SignUpForm({ onSuccess, onSwitchToSignIn }: SignUpFormProps) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
+          minLength={6}
         />
       </div>
 

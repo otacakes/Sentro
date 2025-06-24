@@ -1,62 +1,58 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { createClient } from '@supabase/supabase-js'
+import { withCSRF } from '@/lib/csrf'
 
-export async function GET(request: NextRequest) {
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+
+if (!supabaseUrl || !supabaseServiceKey) {
+  throw new Error('Missing Supabase environment variables')
+}
+
+const supabase = createClient(supabaseUrl, supabaseServiceKey)
+
+async function statsHandler(request: NextRequest) {
   try {
-    if (!supabase) {
+    // Get user statistics
+    const { data: users, error: usersError } = await supabase.auth.admin.listUsers()
+    
+    if (usersError) {
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error fetching users for stats:', usersError)
+      }
       return NextResponse.json(
-        { error: 'Database connection not available' },
+        { error: 'Failed to fetch user statistics' },
         { status: 500 }
       )
     }
 
-    // Get total users count
-    const { count: totalUsers, error: usersError } = await supabase
-      .from('user_profiles')
-      .select('*', { count: 'exact', head: true })
-
-    if (usersError) {
-      console.error('Error fetching users count:', usersError)
-    }
-
-    // Get total locations count
-    const { count: totalLocations, error: locationsError } = await supabase
-      .from('favorite_locations')
-      .select('*', { count: 'exact', head: true })
-
-    if (locationsError) {
-      console.error('Error fetching locations count:', locationsError)
-    }
-
-    // Get total search history count (as a proxy for active users)
-    const { count: totalSearches, error: searchesError } = await supabase
-      .from('search_history')
-      .select('*', { count: 'exact', head: true })
-
-    if (searchesError) {
-      console.error('Error fetching search history count:', searchesError)
-    }
-
-    // For now, we'll use mock data for alerts since we don't have an alerts table yet
-    const totalAlerts = 5 // Mock data
+    const totalUsers = users.users.length
+    const confirmedUsers = users.users.filter(user => user.email_confirmed_at !== null).length
+    const recentUsers = users.users.filter(user => {
+      const createdAt = new Date(user.created_at)
+      const oneWeekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+      return createdAt > oneWeekAgo
+    }).length
 
     const stats = {
-      totalUsers: totalUsers || 0,
-      activeUsers: totalSearches || 0, // Using search history as proxy for active users
-      totalLocations: totalLocations || 0,
-      totalAlerts: totalAlerts
+      totalUsers,
+      confirmedUsers,
+      pendingUsers: totalUsers - confirmedUsers,
+      recentUsers,
+      confirmationRate: totalUsers > 0 ? Math.round((confirmedUsers / totalUsers) * 100) : 0
     }
 
-    return NextResponse.json({
-      success: true,
-      data: stats
-    })
+    return NextResponse.json({ stats })
 
   } catch (error) {
-    console.error('Error fetching admin stats:', error)
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Stats API error:', error)
+    }
     return NextResponse.json(
-      { error: 'Failed to fetch admin statistics' },
+      { error: 'Internal server error' },
       { status: 500 }
     )
   }
-} 
+}
+
+export const GET = withCSRF(statsHandler) 
