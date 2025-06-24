@@ -7,7 +7,6 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Loader2 } from 'lucide-react'
-import { toast } from 'sonner'
 
 interface SignInFormProps {
   onSuccess?: () => void
@@ -34,21 +33,14 @@ export function SignInForm({ onSuccess, onSwitchToSignUp }: SignInFormProps) {
       const { error } = await signIn(email, password, csrfToken)
       
       if (error) {
-        if (error.message.includes('No account found') || error.message.includes('User not found')) {
-          setError(`${error.message} Would you like to create a new account?`)
-        } else {
-          setError(error.message || 'Sign in failed')
-        }
-        toast.error(error)
+        setError(error.message || 'Sign in failed')
       } else {
         onSuccess?.()
-        toast.success('Signed in successfully!')
         setEmail('')
         setPassword('')
       }
     } catch (err) {
       setError('An unexpected error occurred')
-      toast.error('Failed to sign in. Please try again.')
     } finally {
       setLoading(false)
     }
@@ -79,7 +71,7 @@ export function SignInForm({ onSuccess, onSwitchToSignUp }: SignInFormProps) {
           required
         />
       </div>
-
+      
       {error && (
         <Alert variant="destructive">
           <AlertDescription>{error}</AlertDescription>
