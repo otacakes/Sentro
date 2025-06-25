@@ -5,6 +5,7 @@ import { ErrorBoundary } from '@/components/error-boundary'
 import { ThemeProvider } from '@/components/theme-provider'
 import { BetterAuthProvider } from '@/components/auth/better-auth-provider'
 import { AppStoreProvider } from '@/store/app-store'
+import { SessionProvider } from 'next-auth/react'
 import { AuthModalController } from '@/components/auth/auth-modal-controller'
 import { Suspense } from 'react'
 
@@ -38,14 +39,16 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <ErrorBoundary>
-            <AppStoreProvider>
-              <BetterAuthProvider>
-                <Suspense fallback={<div>Loading...</div>}>
-                  <AuthModalController />
-                </Suspense>
-                {children}
-              </BetterAuthProvider>
-            </AppStoreProvider>
+            <SessionProvider>
+              <AppStoreProvider>
+                <BetterAuthProvider>
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <AuthModalController />
+                  </Suspense>
+                  {children}
+                </BetterAuthProvider>
+              </AppStoreProvider>
+            </SessionProvider>
           </ErrorBoundary>
         </ThemeProvider>
       </body>
