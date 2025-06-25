@@ -1,13 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { generateCSRFToken, storeCSRFToken, cleanupExpiredTokens } from './lib/csrf'
+import { generateCSRFToken, storeCSRFToken } from './lib/csrf'
 
 export function middleware(request: NextRequest) {
   const response = NextResponse.next()
-
-  // Clean up expired CSRF tokens periodically
-  if (Math.random() < 0.01) { // 1% chance to run cleanup
-    cleanupExpiredTokens()
-  }
 
   // Generate session ID if not present
   let sessionId = request.cookies.get('session')?.value
@@ -21,7 +16,7 @@ export function middleware(request: NextRequest) {
     })
   }
 
-  // Generate CSRF token for forms
+  // Generate CSRF token for forms (only on specific routes)
   if (request.nextUrl.pathname.startsWith('/login') || 
       request.nextUrl.pathname.startsWith('/signup') ||
       request.nextUrl.pathname.startsWith('/dashboard')) {

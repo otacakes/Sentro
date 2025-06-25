@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
-import crypto from 'crypto'
 
 // CSRF token storage (in production, use Redis or database)
 const csrfTokens = new Map<string, { token: string; expires: number }>()
 
-// Generate a CSRF token
+// Generate a CSRF token using Web Crypto API (Edge Runtime compatible)
 export function generateCSRFToken(): string {
-  return crypto.randomBytes(32).toString('hex')
+  const array = new Uint8Array(32)
+  crypto.getRandomValues(array)
+  return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('')
 }
 
 // Validate CSRF token
