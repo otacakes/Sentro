@@ -34,11 +34,11 @@ export function storeCSRFToken(sessionId: string, token: string): void {
 // Clean up expired tokens
 export function cleanupExpiredTokens(): void {
   const now = Date.now()
-  for (const [sessionId, data] of csrfTokens.entries()) {
+  csrfTokens.forEach((data, sessionId) => {
     if (now > data.expires) {
       csrfTokens.delete(sessionId)
     }
-  }
+  })
 }
 
 // CSRF middleware for API routes
