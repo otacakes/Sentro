@@ -21,8 +21,10 @@ export function AuthModal({
   const [mode, setMode] = useState<'signin' | 'signup'>(defaultMode)
 
   useEffect(() => {
-    setMode(defaultMode)
-  }, [defaultMode])
+    if (isOpen) {
+      setMode(defaultMode)
+    }
+  }, [isOpen, defaultMode])
 
   const handleSuccess = () => {
     onSuccess?.()
