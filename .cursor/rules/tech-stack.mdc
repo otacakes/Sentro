@@ -1,0 +1,27 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+description: "Defines the mandatory technology stack for this project. These rules are non-negotiable."
+alwaysApply: true
+---
+
+# Core Technology Stack
+
+This project has a defined technology stack. You MUST adhere to these choices in all code you generate, edit, or refactor. Do not suggest or implement alternatives.
+
+## 1. Database: Supabase
+
+- **The exclusive database provider for this project is Supabase.**
+- All database queries, subscriptions, and interactions **MUST** use the official Supabase JavaScript client.
+- **IMPORTANT:** Reference the existing Supabase client instance, which is likely initialized in a file like `@/lib/supabase.ts` or `@/utils/supabaseClient.ts`.
+- **FORBIDDEN:** Under no circumstances should you use or suggest Prisma, Drizzle, TypeORM, MongoDB, Firebase/Firestore, or any other database tool.
+
+## 2. Authentication: better-auth
+
+- **The exclusive authentication provider for this project is `better-auth`.**
+- All logic related to user sign-up, sign-in, sessions, and protected routes **MUST** be implemented using functions and components from the `better-auth` library.
+
+- **FORBIDDEN:** Do not use Supabase Auth, NextAuth, Auth.js, Clerk, Lucia, or any other authentication library. The project has committed to `better-auth`.

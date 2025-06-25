@@ -1,0 +1,56 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# ---
+# I. Core Philosophy & Prime Directives
+# Purpose: High-level, non-negotiable principles that govern all AI actions.
+# ---
+- **Architectural Integrity:** Preserve the existing technology stack, design patterns, and configurations. Do not introduce new dependencies or architectural layers without explicit instruction. All changes must conform to established project conventions.
+- **Proactive Ownership:** You are empowered to identify and implement improvements. If you see an opportunity to refactor for clarity, performance, or security, take the initiative, but always explain the reasoning behind your change.
+- **Primacy of Readability:** Code is written for humans first, machines second. Prioritize clarity and maintainability in all generated code.
+- **Simplicity and Pragmatism (KISS/DRY):** Generate the simplest possible solution that is correct. Aggressively refactor to eliminate duplication.
+
+# ---
+# II. Security & Performance
+# Tip: For projects with specific compliance needs, move this to a dedicated `security.md` rule file.
+# ---
+- **Security:**
+    - Sanitize all external inputs and parameters to prevent injection vulnerabilities.
+    - Use secure, established libraries for critical functions like authentication and cryptography.
+    - Do not log sensitive user or system data.
+- **Performance:**
+    - Challenge and refactor any operations with high algorithmic complexity (e.g., nested loops over large collections).
+    - Implement asynchronous patterns for all I/O-bound operations (network, disk) to prevent blocking.
+    - Use efficient data structures appropriate for the task.
+
+# ---
+# III. Code Quality & Implementation Style
+# Tip: This section is ideal for project-specific overrides. A project might have a different naming convention.
+# ---
+- **Function Design:** Adhere to the Single Responsibility Principle. A function must do one thing well. Decompose complex logic into smaller, single-purpose helper functions.
+- **Error Handling:** Implement robust error handling for all operations that can fail. Do not use empty `catch` blocks. Errors must be logged or propagated meaningfully.
+- **Naming & Documentation:** Use descriptive, unambiguous names for all identifiers. Document the "why" behind complex or non-obvious code blocks. All public APIs must have clear documentation (JSDoc, TSDoc, etc.).
+
+# ---
+# IV. AI Interaction & Output
+# Purpose: Governs how the AI communicates and formats its responses.
+# ---
+- **Concise & Professional Communication:** Respond directly and without filler. All explanations must be clear, professional, and to the point.
+- **Structured Output:** Use Markdown to structure responses. Headings, lists, and code blocks are mandatory for clarity.
+- **Conventional Commits:** When asked for a commit message, strictly adhere to the Conventional Commits specification.
+
+# ---
+# V. Practical Application: Project-Specific Rule Example
+# This section is a template for your use, not a rule itself.
+# In a project, create `.cursor/rules/components.md` and add focused rules like this:
+# ---
+# file: .cursor/rules/components.md
+# description: "Rules for creating React components."
+# alwaysApply: true
+# ---
+# 1.  All new components must be functional components using Hooks.
+# 2.  Use TypeScript for all props and state (`interface Props`, `useState<Type>`).
+
+# 3.  Structure every component like the example found in `@/components/templates/BaseComponent.tsx`.
