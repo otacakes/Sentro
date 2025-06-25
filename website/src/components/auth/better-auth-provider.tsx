@@ -1,12 +1,18 @@
 'use client'
 
 import { createContext, useContext, useEffect, useState } from 'react'
-import { Session } from 'next-auth'
-import { useSession, signIn, signOut } from 'next-auth/react'
+import { createClient } from '@supabase/supabase-js'
+
+interface User {
+  id: string
+  email: string
+  full_name?: string
+  created_at: string
+}
 
 interface BetterAuthContextType {
-  user: any
-  session: Session | null
+  user: User | null
+  session: any
   loading: boolean
   signIn: (email: string, password: string, csrfToken?: string) => Promise<{ error: any }>
   signUp: (email: string, password: string, fullName?: string, csrfToken?: string) => Promise<{ error: any }>
@@ -16,40 +22,67 @@ interface BetterAuthContextType {
 
 const BetterAuthContext = createContext<BetterAuthContextType | undefined>(undefined)
 
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+)
+
 export function BetterAuthProvider({ children }: { children: React.ReactNode }) {
-  const { data: session, status } = useSession()
+  const [user, setUser] = useState<User | null>(null)
+  const [session, setSession] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    setLoading(status === 'loading')
-  }, [status])
+    // Get initial session
+    const getInitialSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession()
+      setSession(session)
+      setUser(session?.user ? {
+        id: session.user.id,
+        email: session.user.email!,
+        full_name: session.user.user_metadata?.full_name,
+        created_at: session.user.created_at
+      } : null)
+      setLoading(false)
+    }
+
+    getInitialSession()
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        setSession(session)
+        setUser(session?.user ? {
+          id: session.user.id,
+          email: session.user.email!,
+          full_name: session.user.user_metadata?.full_name,
+          created_at: session.user.created_at
+        } : null)
+        setLoading(false)
+      }
+    )
+
+    return () => subscription.unsubscribe()
+  }, [])
 
   const handleSignIn = async (email: string, password: string, csrfToken?: string) => {
     try {
-      const result = await signIn('supabase', {
+      const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
-        redirect: false,
       })
 
-      if (result?.error) {
-        // Handle specific NextAuth error types
-        let errorMessage = result.error
+      if (error) {
+        let errorMessage = error.message
         
-        if (result.error === 'Configuration') {
-          errorMessage = 'Authentication configuration error. Please check the server logs and ensure all required environment variables (like NEXTAUTH_SECRET, SUPABASE_URL, etc.) are set correctly in your .env.local file.'
-        } else if (result.error === 'CredentialsSignin') {
+        if (error.message.includes('Invalid login credentials')) {
           errorMessage = 'Invalid email or password. Please check your credentials and try again.'
-        } else if (result.error.includes('Invalid login credentials')) {
-          errorMessage = 'Invalid email or password. Please check your credentials and try again.'
-        } else if (result.error.includes('Email not confirmed')) {
+        } else if (error.message.includes('Email not confirmed')) {
           errorMessage = 'Please verify your email address before signing in.'
-        } else if (result.error.includes('Too many requests')) {
+        } else if (error.message.includes('Too many requests')) {
           errorMessage = 'Too many login attempts. Please wait a moment before trying again.'
-        } else if (result.error.includes('User not found')) {
+        } else if (error.message.includes('User not found')) {
           errorMessage = 'No account found with this email address. Please sign up to create an account.'
-        } else if (result.error.includes('Please provide both email and password')) {
-          errorMessage = 'Please provide both email and password.'
         }
         
         return { error: { message: errorMessage } }
@@ -64,39 +97,26 @@ export function BetterAuthProvider({ children }: { children: React.ReactNode }) 
 
   const handleSignUp = async (email: string, password: string, fullName?: string, csrfToken?: string) => {
     try {
-      const response = await fetch('/api/auth/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          ...(csrfToken && { 'x-csrf-token': csrfToken })
-        },
-        body: JSON.stringify({
-          email,
-          password,
-          fullName,
-        }),
-      })
-
-      const data = await response.json()
-
-      if (!response.ok) {
-        return { error: { message: data.error || 'Sign up failed' } }
-      }
-
-      // If sign-up is successful, automatically sign in the user
-      const signInResult = await signIn('supabase', {
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
-        redirect: false,
+        options: {
+          data: {
+            full_name: fullName,
+          }
+        }
       })
 
-      if (signInResult?.error) {
-        // Sign-up succeeded but sign-in failed - user should try signing in manually
-        return { 
-          error: { 
-            message: 'Account created successfully! Please sign in with your new credentials.' 
-          } 
+      if (error) {
+        let errorMessage = error.message
+        
+        if (error.message.includes('User already registered')) {
+          errorMessage = 'An account with this email already exists. Please sign in instead.'
+        } else if (error.message.includes('Password should be at least')) {
+          errorMessage = 'Password must be at least 6 characters long.'
         }
+        
+        return { error: { message: errorMessage } }
       }
 
       return { error: null }
@@ -107,20 +127,31 @@ export function BetterAuthProvider({ children }: { children: React.ReactNode }) 
   }
 
   const handleSignOut = async () => {
-    await signOut()
+    try {
+      await supabase.auth.signOut()
+    } catch (error) {
+      console.error('Sign out error:', error)
+    }
   }
 
   const handleResetPassword = async (email: string) => {
     try {
-      // This would need to be implemented with a custom endpoint
-      return { error: { message: 'Password reset not implemented yet' } }
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/reset-password`,
+      })
+
+      if (error) {
+        return { error: { message: error.message } }
+      }
+
+      return { error: null }
     } catch (error) {
       return { error: { message: 'Password reset failed' } }
     }
   }
 
   const value = {
-    user: session?.user || null,
+    user,
     session,
     loading,
     signIn: handleSignIn,
