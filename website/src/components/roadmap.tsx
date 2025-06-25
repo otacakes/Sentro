@@ -3,7 +3,6 @@
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { CheckCircle, Circle, Clock, MapPin, Users, Star } from "lucide-react"
-import { useRef, useEffect, useState } from "react"
 
 interface RoadmapItem {
   id: string
@@ -127,6 +126,9 @@ const statusConfig = {
 export function Roadmap({ visible = true }: { visible?: boolean }) {
   const sortedItems = [...roadmapItems].sort((a, b) => a.order - b.order)
 
+  // Ensure we're in a browser environment for icon rendering
+  const isClient = typeof window !== 'undefined'
+
   return (
     <div className={`w-full max-w-4xl mx-auto p-6 transition-all duration-700 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
       <div className="text-center mb-12">
@@ -153,58 +155,89 @@ export function Roadmap({ visible = true }: { visible?: boolean }) {
             {sortedItems.map((item, index) => {
               const isLeft = index % 2 === 0
               const config = statusConfig[item.status]
-              const Icon = config.icon
-
-              const CardComponent = () => (
-                <Card
-                  className={`
-                    ${config.borderColor} border-2 hover:shadow-lg transition-all duration-700
-                    ${config.bgColor} w-80
-                  `}
-                >
-                  <CardHeader className="pb-3">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-2">
-                        <MapPin className={`w-4 h-4 ${config.textColor}`} />
-                        <CardTitle className="text-base font-semibold">{item.title}</CardTitle>
-                      </div>
-                      <Badge variant="outline" className="text-xs">
-                        {item.phase}
-                      </Badge>
-                    </div>
-                    <CardDescription className="text-sm ml-6">{item.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="pt-0">
-                    <div className="flex items-center justify-between ml-6">
-                      <Badge variant="secondary" className={`text-xs ${config.textColor}`}>
-                        {config.label}
-                      </Badge>
-                      <div className="flex items-center space-x-1 text-primary">
-                        <Star className="w-3 h-3" />
-                        <span className="text-xs">#{item.order}</span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              );
+              const IconComponent = config.icon
 
               return (
                 <div key={item.id} className="relative flex items-center justify-center">
                   {/* Left-side card */}
                   <div className={`w-1/2 flex justify-end ${isLeft ? 'pr-8' : ''}`}>
-                    {isLeft && <CardComponent />}
+                    {isLeft && (
+                      <Card
+                        className={`
+                          ${config.borderColor} border-2 hover:shadow-lg transition-all duration-700
+                          ${config.bgColor} w-80
+                        `}
+                      >
+                        <CardHeader className="pb-3">
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center space-x-2">
+                              <MapPin className={`w-4 h-4 ${config.textColor}`} />
+                              <CardTitle className="text-base font-semibold">{item.title}</CardTitle>
+                            </div>
+                            <Badge variant="outline" className="text-xs">
+                              {item.phase}
+                            </Badge>
+                          </div>
+                          <CardDescription className="text-sm ml-6">{item.description}</CardDescription>
+                        </CardHeader>
+                        <CardContent className="pt-0">
+                          <div className="flex items-center justify-between ml-6">
+                            <Badge variant="secondary" className={`text-xs ${config.textColor}`}>
+                              {typeof IconComponent === 'function' ? <IconComponent className="w-3 h-3 mr-1" /> : null}
+                              {config.label}
+                            </Badge>
+                            <div className="flex items-center space-x-1 text-primary">
+                              <Star className="w-3 h-3" />
+                              <span className="text-xs">#{item.order}</span>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    )}
                   </div>
 
                   {/* Central marker */}
                   <div className="absolute left-1/2 top-1/2 w-12 h-12 rounded-full flex items-center justify-center z-10 -translate-x-1/2 -translate-y-1/2">
                     <div className={`w-full h-full rounded-full ${config.color} flex items-center justify-center shadow-lg border-4 border-background`}>
-                      <Icon className="w-6 h-6 text-background" />
+                      {typeof IconComponent === 'function' ? <IconComponent className="w-6 h-6 text-background" /> : null}
                     </div>
                   </div>
 
                   {/* Right-side card */}
                   <div className={`w-1/2 flex justify-start ${!isLeft ? 'pl-8' : ''}`}>
-                    {!isLeft && <CardComponent />}
+                    {!isLeft && (
+                      <Card
+                        className={`
+                          ${config.borderColor} border-2 hover:shadow-lg transition-all duration-700
+                          ${config.bgColor} w-80
+                        `}
+                      >
+                        <CardHeader className="pb-3">
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center space-x-2">
+                              <MapPin className={`w-4 h-4 ${config.textColor}`} />
+                              <CardTitle className="text-base font-semibold">{item.title}</CardTitle>
+                            </div>
+                            <Badge variant="outline" className="text-xs">
+                              {item.phase}
+                            </Badge>
+                          </div>
+                          <CardDescription className="text-sm ml-6">{item.description}</CardDescription>
+                        </CardHeader>
+                        <CardContent className="pt-0">
+                          <div className="flex items-center justify-between ml-6">
+                            <Badge variant="secondary" className={`text-xs ${config.textColor}`}>
+                              {typeof IconComponent === 'function' ? <IconComponent className="w-3 h-3 mr-1" /> : null}
+                              {config.label}
+                            </Badge>
+                            <div className="flex items-center space-x-1 text-primary">
+                              <Star className="w-3 h-3" />
+                              <span className="text-xs">#{item.order}</span>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    )}
                   </div>
                 </div>
               );
@@ -224,9 +257,9 @@ export function Roadmap({ visible = true }: { visible?: boolean }) {
       
       {/* Mobile Roadmap */}
       <div className="md:hidden space-y-6">
-        {sortedItems.map((item, index) => {
+        {sortedItems.map((item) => {
           const config = statusConfig[item.status]
-          const Icon = config.icon
+          const IconComponent = config.icon
           return (
             <Card
               key={item.id}
@@ -245,7 +278,7 @@ export function Roadmap({ visible = true }: { visible?: boolean }) {
               <CardContent className="pt-2">
                 <div className="flex items-center justify-between">
                   <Badge variant="secondary" className={`inline-flex items-center gap-1.5 text-xs ${config.textColor}`}>
-                    <Icon className="w-3 h-3" />
+                    {typeof IconComponent === 'function' ? <IconComponent className="w-3 h-3 mr-1" /> : null}
                     {config.label}
                   </Badge>
                   <div className="flex items-center space-x-1 text-primary">

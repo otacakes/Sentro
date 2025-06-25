@@ -15,7 +15,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
@@ -135,13 +134,11 @@ function Footer() {
 
 export default function HomePage() {
   const roadmapRef = useRef<HTMLDivElement>(null)
-  const [roadmapVisible, setRoadmapVisible] = useState(false)
 
   useEffect(() => {
     const observer = new window.IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setRoadmapVisible(true)
           observer.disconnect()
         }
       },
@@ -152,12 +149,6 @@ export default function HomePage() {
     }
     return () => observer.disconnect()
   }, [])
-
-  const scrollToRoadmap = () => {
-    if (roadmapRef.current) {
-      roadmapRef.current.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
 
   return (
     <div className="flex flex-col min-h-screen bg-background">

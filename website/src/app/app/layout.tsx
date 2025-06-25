@@ -5,8 +5,11 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { Button } from "@/components/ui/button"
 import { MapPin, Search, Newspaper, Zap } from 'lucide-react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import Link from 'next/link'
 import { Suspense } from "react"
+import { ThemeProvider } from "@/components/theme-provider"
+import { BetterAuthProvider } from "@/components/auth/better-auth-provider"
+import { AppStoreProvider } from "@/store/app-store"
+import { AuthModalController } from "@/components/auth/auth-modal-controller"
 
 function LayoutContent({ children }: { children: React.ReactNode }) {
   const router = useRouter()
