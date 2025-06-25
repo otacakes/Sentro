@@ -30,8 +30,9 @@ export function SignUpForm({ onSuccess, onSwitchToSignIn }: SignUpFormProps) {
 
     try {
       // Get CSRF token from meta tag or previous response
-      const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') ||
-                       localStorage.getItem('csrf-token')
+      const metaToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content')
+      const storedToken = localStorage.getItem('csrf-token')
+      const csrfToken = metaToken || (storedToken ?? undefined)
 
       const { error } = await signUp(email, password, fullName, csrfToken)
       
