@@ -1,7 +1,6 @@
 'use client'
 
 import { createContext, useContext, useEffect, useState } from 'react'
-import { useSession } from 'next-auth/react'
 import { signIn, signOut } from 'next-auth/react'
 
 interface BetterAuthContextType {
@@ -17,12 +16,26 @@ interface BetterAuthContextType {
 const BetterAuthContext = createContext<BetterAuthContextType | undefined>(undefined)
 
 export function BetterAuthProvider({ children }: { children: React.ReactNode }) {
-  const { data: session, status } = useSession()
+  const [session, setSession] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    setLoading(status === 'loading')
-  }, [status])
+    // Fetch session on client side
+    const fetchSession = async () => {
+      try {
+        const response = await fetch('/api/auth/session')
+        const sessionData = await response.json()
+        setSession(sessionData)
+      } catch (error) {
+        console.error('Failed to fetch session:', error)
+        setSession(null)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchSession()
+  }, [])
 
   const handleSignIn = async (email: string, password: string, csrfToken?: string) => {
     try {
@@ -54,6 +67,11 @@ export function BetterAuthProvider({ children }: { children: React.ReactNode }) 
         
         return { error: { message: errorMessage } }
       }
+
+      // Refresh session after successful sign in
+      const response = await fetch('/api/auth/session')
+      const sessionData = await response.json()
+      setSession(sessionData)
 
       return { error: null }
     } catch (error) {
@@ -99,6 +117,11 @@ export function BetterAuthProvider({ children }: { children: React.ReactNode }) 
         }
       }
 
+      // Refresh session after successful sign up and sign in
+      const sessionResponse = await fetch('/api/auth/session')
+      const sessionData = await sessionResponse.json()
+      setSession(sessionData)
+
       return { error: null }
     } catch (error) {
       console.error('Sign up error:', error)
@@ -108,6 +131,7 @@ export function BetterAuthProvider({ children }: { children: React.ReactNode }) 
 
   const handleSignOut = async () => {
     await signOut()
+    setSession(null)
   }
 
   const handleResetPassword = async (email: string) => {
