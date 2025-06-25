@@ -8,6 +8,7 @@ import { AppStoreProvider } from '@/store/app-store'
 import { SessionProvider } from 'next-auth/react'
 import { AuthModalController } from '@/components/auth/auth-modal-controller'
 import { Suspense } from 'react'
+import { auth } from '@/lib/auth'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -19,11 +20,13 @@ export const metadata: Metadata = {
   description: 'Sentro: Take Control of Your Daily Commute. Live vehicle tracking, crowd levels, and instant alerts for trains, buses, and modern jeepneys. Privacy-first, community-driven, open source.'
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const session = await auth()
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -39,7 +42,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <ErrorBoundary>
-            <SessionProvider>
+            <SessionProvider session={session}>
               <AppStoreProvider>
                 <BetterAuthProvider>
                   <Suspense fallback={<div>Loading...</div>}>
