@@ -1,12 +1,12 @@
 'use client'
 
 import { createContext, useContext, useEffect, useState } from 'react'
-import { Session } from 'next-auth'
-import { useSession, signIn, signOut } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
+import { signIn, signOut } from 'next-auth/react'
 
 interface BetterAuthContextType {
   user: any
-  session: Session | null
+  session: any
   loading: boolean
   signIn: (email: string, password: string, csrfToken?: string) => Promise<{ error: any }>
   signUp: (email: string, password: string, fullName?: string, csrfToken?: string) => Promise<{ error: any }>
