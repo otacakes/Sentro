@@ -16,10 +16,10 @@ interface FavoritesPanelProps {
 }
 
 const categoryIcons = {
-  home: <Home className="w-4 h-4" />,
-  work: <Briefcase className="w-4 h-4" />,
-  school: <GraduationCap className="w-4 h-4" />,
-  other: <Map className="w-4 h-4" />
+  home: Home,
+  work: Briefcase,
+  school: GraduationCap,
+  other: Map
 }
 
 const categoryColors = {
@@ -167,7 +167,10 @@ export function FavoritesPanel({ onLocationSelect, onAddFavorite }: FavoritesPan
                   onClick={() => handleLocationSelect(favorite)}
                 >
                   <div className="flex items-center gap-2 mb-1">
-                    {categoryIcons[favorite.category]}
+                    {(() => {
+                      const IconComponent = categoryIcons[favorite.category];
+                      return <IconComponent className="w-4 h-4" />;
+                    })()}
                     <span className="font-medium">{favorite.name}</span>
                     <Badge 
                       variant="secondary" 

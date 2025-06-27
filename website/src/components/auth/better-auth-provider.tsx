@@ -24,8 +24,28 @@ export function BetterAuthProvider({ children }: { children: React.ReactNode }) 
     const fetchSession = async () => {
       try {
         const response = await fetch('/api/auth/session')
-        const sessionData = await response.json()
-        setSession(sessionData)
+        
+        if (!response.ok) {
+          console.error('Session response not ok:', response.status, response.statusText)
+          setSession(null)
+          return
+        }
+        
+        const text = await response.text()
+        
+        if (!text || text.trim() === '') {
+          console.log('Empty session response')
+          setSession(null)
+          return
+        }
+        
+        try {
+          const sessionData = JSON.parse(text)
+          setSession(sessionData)
+        } catch (parseError) {
+          console.error('Failed to parse session JSON:', parseError, 'Response text:', text)
+          setSession(null)
+        }
       } catch (error) {
         console.error('Failed to fetch session:', error)
         setSession(null)
@@ -69,9 +89,22 @@ export function BetterAuthProvider({ children }: { children: React.ReactNode }) 
       }
 
       // Refresh session after successful sign in
-      const response = await fetch('/api/auth/session')
-      const sessionData = await response.json()
-      setSession(sessionData)
+      try {
+        const response = await fetch('/api/auth/session')
+        if (response.ok) {
+          const text = await response.text()
+          if (text && text.trim() !== '') {
+            try {
+              const sessionData = JSON.parse(text)
+              setSession(sessionData)
+            } catch (parseError) {
+              console.error('Failed to parse session JSON after sign in:', parseError)
+            }
+          }
+        }
+      } catch (sessionError) {
+        console.error('Failed to refresh session after sign in:', sessionError)
+      }
 
       return { error: null }
     } catch (error) {
@@ -118,9 +151,22 @@ export function BetterAuthProvider({ children }: { children: React.ReactNode }) 
       }
 
       // Refresh session after successful sign up and sign in
-      const sessionResponse = await fetch('/api/auth/session')
-      const sessionData = await sessionResponse.json()
-      setSession(sessionData)
+      try {
+        const sessionResponse = await fetch('/api/auth/session')
+        if (sessionResponse.ok) {
+          const text = await sessionResponse.text()
+          if (text && text.trim() !== '') {
+            try {
+              const sessionData = JSON.parse(text)
+              setSession(sessionData)
+            } catch (parseError) {
+              console.error('Failed to parse session JSON after sign up:', parseError)
+            }
+          }
+        }
+      } catch (sessionError) {
+        console.error('Failed to refresh session after sign up:', sessionError)
+      }
 
       return { error: null }
     } catch (error) {

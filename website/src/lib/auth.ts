@@ -1,6 +1,7 @@
 import NextAuth from "next-auth"
 import { SupabaseAdapter } from "@auth/supabase-adapter"
 import { createClient } from "@supabase/supabase-js"
+import CredentialsProvider from "next-auth/providers/credentials"
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
@@ -11,17 +12,16 @@ const supabase = supabaseUrl && supabaseServiceKey
   ? createClient(supabaseUrl, supabaseServiceKey)
   : null
 
-export const { handlers, auth, signIn, signOut } = NextAuth({
+export const authOptions = {
   secret: nextAuthSecret,
   adapter: supabaseUrl && supabaseServiceKey ? SupabaseAdapter({
     url: supabaseUrl,
     secret: supabaseServiceKey,
   }) : undefined,
   providers: [
-    {
+    CredentialsProvider({
       id: "supabase",
       name: "Supabase",
-      type: "credentials",
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" }
@@ -60,7 +60,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           image: data.user.user_metadata?.avatar_url,
         }
       }
-    }
+    })
   ],
   callbacks: {
     async jwt({ token, user }: any) {
@@ -81,7 +81,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     error: '/login',
   },
   session: {
-    strategy: "jwt",
+    strategy: "jwt" as const,
   },
   debug: process.env.NODE_ENV === 'development',
-}) 
+}
+
+export const { handlers, auth, signIn, signOut } = NextAuth(authOptions) 

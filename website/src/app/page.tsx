@@ -340,7 +340,10 @@ export default function HomePage() {
                 Our roadmap is shaped by community feedback. Here's what we're building next.
               </p>
             </div>
-            <Roadmap />
+            {/* <Roadmap /> */}
+            <div className="text-center text-muted-foreground">
+              <p>Roadmap temporarily disabled for debugging</p>
+            </div>
           </div>
         </section>
 

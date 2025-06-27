@@ -126,9 +126,6 @@ const statusConfig = {
 export function Roadmap({ visible = true }: { visible?: boolean }) {
   const sortedItems = [...roadmapItems].sort((a, b) => a.order - b.order)
 
-  // Ensure we're in a browser environment for icon rendering
-  const isClient = typeof window !== 'undefined'
-
   return (
     <div className={`w-full max-w-4xl mx-auto p-6 transition-all duration-700 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
       <div className="text-center mb-12">
